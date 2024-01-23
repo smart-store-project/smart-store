@@ -26,6 +26,10 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation group: 'org.springframework', name: 'spring-core', version: '5.3.23'
+    implementation group: 'org.springframework', name: 'spring-context', version: '5.3.23'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '5.3.23'
+    implementation group: 'org.springframework', name: 'spring-web', version: '5.3.23'
 
     implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.23'
     implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.1.1.RELEASE'
@@ -39,6 +43,8 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.2'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.10.Final'
+    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.5'
+
 }
 
 test {

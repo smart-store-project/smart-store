@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IProductService {
     List<Product> findAllByBrand(Brand brand);
-
+    public Page<Product> findProductsByBrandAndCategory(Brand brand, Category category, Pageable pageable);
     List<Product> findAllByCategory(Category category);
 
     Product findById(Long id);

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<header class="header" th:fragment="header">
+    <!-- Header -->
+    <div class="header custom-gradient px-60 ">
+        <div class="grid max-w-full mx-auto">
+            <!-- Navbar -->
+            <div class="flex justify-between items-center h-12">
+                <ul class="navbar__left flex items-center">
+                    <li class="relative sm:inline-flex items-center">
+                        <a href="https://banhang.shopee.vn/"
+                           class="navbar__left--link border-r border-white-22 text-white hover:opacity-70 pr-4 pl-4">
+                            Kênh Người Bán
+                        </a>
+                    </li>
+                    <li class="navbar--button inline-block">
+                        <a href="https://banhang.shopee.vn/"
+                           class="navbar__left--link border-r border-white-22 text-white hover:opacity-70 pr-4 pl-4">
+                            Tải ứng dụng
+                        </a>
+                        <div class="subnav__download navbar__subnav hidden absolute top-12 left-2 p-2 w-72 bg-white box-border animate-fadeIn z-20">
+                            <a href="https://shopee.vn/web" target="_blank">
+                                <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/d91264e165ed6facc6178994d5afae79.png"
+                                     alt="download_qr_code" class="subnav__download--qrcode">
+                                <div class="flex flex-wrap sm:flex-no-wrap justify-between items-center p-4">
+                                    <img src="/resources/image/ios.png" class="w-28 w-full sm:w-1/2 mb-4 pr-3" alt="">
+                                    <img src="/resources/image/android.png" class="w-28 w-full sm:w-1/2 mb-4" alt="">
+                                    <div class="w-full mb-4">
+                                        <img src="/resources/image/appgallery.png" class="w-28" alt="">
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                    </li>
+                    <li class="relative sm:inline-flex items-center">
+                        <a href="https://banhang.shopee.vn/"
+                           class="navbar__left--link border-r border-white-22 text-white hover:opacity-70 pr-4 pl-4">
+                            Kết nối
+                        </a>
+                    </li>
+                    <li class="relative sm:inline-flex items-center">
+                        <div class="navbar__left--item">
+                            <a href="https://facebook.com/ShopeeVN" class="navbar__left--icon fab fa-facebook"
+                               title="Kết nối Facebook"></a>
+                            <a href="https://instagram.com/Shopee_VN" class="navbar__left--icon fab fab fa-instagram"
+                               title="Kết nối Instagram"></a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- Notification -->
+                <ul class="navbar__left flex items-center">
+                    <li class="navbar--button navbar__right--notify">
+                        <a href="https://shopee.vn/user/notifications/order"
+                           class="text-white text-lg flex items-center">
+                            <i class="far fa-bell navbar__right--icon"></i>
+                            <div class="navbar__right--notify-label absolute top-[-0.6rem] right-[7.5rem] w-2.1rem h-1.6rem bottom-4 text-center  inline-flex items-center justify-center">
+                                3
+                            </div>
+                            <span class="ml-2" style="font-size: 14px">Thông báo</span>
+                        </a>
+                        <div class="user__notify navbar__subnav ">
+                            <div class="user__notify-heading text-lg font-semibold pl-4 text-gray-600">Thông báo mới
+                                nhận
+                            </div>
+                            <div class="user__notify-container max-h-[50vh] overflow-y-auto flex flex-col">
+                                <div class="user__notify-container max-h-[50vh] overflow-y-auto flex flex-col">
+                                    <div class="user__notify-container--item flex items-center p-4 hover:bg-gray-100">
+                                        <div class="user__notify-container--item-img w-10 h-10 bg-cover bg-no-repeat flex-shrink-0"
+                                             style="background-image: url(https://i.pinimg.com/originals/94/d6/d6/94d6d6655f6b8a6d58c558892d570d5a.jpg); background-size: contain; background-repeat: no-repeat; flex: 0 0 auto;"></div>
+                                        <div class="user__notify-container--item-main ml-4">
+                                            <div class="user__notify-container--item-title text-lg font-semibold">Tặng
+                                                bạn mã xịn đầu tháng
+                                            </div>
+                                            <div class="user__notify-container--item-detail text-xl text-gray-500">"💥
+                                                Tặng bạn Voucher 30K 🌈 Đã có
+                                                sẵn trong kho voucher của bạn 👉 Số lượng có hạn - Dùng ngay bạn nhé!"
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user__notify-container max-h-[50vh] overflow-y-auto flex flex-col">
+                                    <div class="user__notify-container--item flex items-center p-4 hover:bg-gray-100">
+                                        <div class="user__notify-container--item-img w-10 h-10 bg-cover bg-no-repeat flex-shrink-0"
+                                             style="background-image: url(https://i.pinimg.com/originals/94/d6/d6/94d6d6655f6b8a6d58c558892d570d5a.jpg); background-size: contain; background-repeat: no-repeat; flex: 0 0 auto;"></div>
+                                        <div class="user__notify-container--item-main ml-4">
+                                            <div class="user__notify-container--item-title text-lg font-semibold">Ưu đãi
+                                                đặc biệt!
+                                            </div>
+                                            <div class="user__notify-container--item-detail text-md text-gray-500">"🎁
+                                                Nhận ngay Voucher 30K 🌟 Đã có
+                                                sẵn trong kho voucher của bạn. Hãy nhanh tay, số lượng có hạn!"
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user__notify-container max-h-[50vh] overflow-y-auto flex flex-col">
+                                <div class="user__notify-container--item flex items-center p-4 hover:bg-gray-100">
+                                    <div class="user__notify-container--item-img w-10 h-10 bg-cover bg-no-repeat flex-shrink-0"
+                                         style="background-image: url(https://tse3.mm.bing.net/th?id=OIP.T1KLEX40BmrtofdOjUFQKQHaHa&pid=Api&P=0&h=220); background-size: cover; background-repeat: no-repeat; flex: 0 0 auto;"></div>
+                                    <div class="user__notify-container--item-main ml-4">
+                                        <div class="user__notify-container--item-title text-lg font-semibold">Ưu đãi đặc
+                                            quyền!
+                                        </div>
+                                        <div class="user__notify-container--item-detail text-md text-gray-500">"🎉 Chào
+                                            mừng bạn với ưu đãi hấp dẫn từ chúng tôi. Khám phá ngay để không bỏ lỡ!"
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user__notify-footer">
+                                <a href="#">Xem tất cả</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Help -->
+                    <li class="navbar--button">
+                        <a href="https://help.shopee.vn/vn/s" class="text-white flex items-center">
+                            <i class="far fa-question-circle navbar__right--icon"></i>
+                            <span class="mr-2" style="font-size: 14px"
+                            >Hỗ trợ</span>
+                        </a>
+                    </li>
+                    <div class="cart-header-container-row-right-title-rel">
+                        <a href="https://shopee.vn/user/purchase/" class="usermode__log">
+                            <img class="usermode--uicon" src="/resources/image/User-Avatar-PNG-Transparent-Image.png"
+                                 alt="">
+                            <p class="navbar__right--link usermode--name " style="font-size: 1.4rem;">Đình Hiếu</p>
+                        </a>
+                        <ul class="usermode__menu navbar__subnav">
+                            <li class="usermode__menu--item">
+                                <a href="https://shopee.vn/user/account/">Tài khoản của tôi</a>
+                            </li>
+                            <li class="usermode__menu--item">
+                                <a href="https://shopee.vn/user/purchase/">Đơn mua</a>
+                            </li>
+                            <li class="usermode__menu--item">
+                                <a href="">Đăng xuất</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- Guestmode Log -->
+<!--                    <li><a href="#" class="text-white flex items-center border-r border-white-22 px-4"-->
+<!--                           style="font-size: 14px">Đăng ký</a></li>-->
+<!--                    <li><a href="#" class="text-white flex items-cen    ter px-4" style="font-size: 14px">Đăng nhập</a></li>-->
+                    <!-- Usermode Log -->
+
+                </ul>
+            </div>
+            <!-- Nav search -->
+            <div class="flex justify-between items-center p-3">
+                <div class="flex items-center">
+                    <label for="mobile-search-checkbox" class="text-white">
+                    </label>
+                </div>
+
+                <input type="checkbox" hidden id="mobile-search-checkbox">
+
+                <div class="px-2 md:px-15 mt-[-5px]">
+                    <a href="https://shopee.vn/" class="flex items-end text-white no-underline mr-5">
+                        <i class="fab fa-shopify text-8xl md:text-7xl"></i>
+                        <div class="pl-2 text-xl md:text-6xl whitespace-nowrap hidden md:block">Smart-Shop</div>
+                    </a>
+                </div>
+
+
+                <div class="navsearch__with-search">
+                    <div class="navsearch__searchbar">
+                        <form action="" class="navsearch__searchbar--main">
+                            <input type="text" class="navsearch__searchbar--input" placeholder="Siêu sale thương hiệu">
+                            <div class="navsearch__history">
+                                <div class="navsearch__history--content">
+                                    <a href="https://shopee.vn/m/1010" class="navsearch__history--prefill">
+                                        Siêu sale thương hiệu
+                                        <img src="../resources/image/supersale.png" alt="">
+                                    </a>
+                                    <a href="https://shopee.vn/search?keyword=tai%20nghe"
+                                       class="navsearch__history--text">tai nghe</a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="wtosearch navbar--button">
+                            <div class="wtosearch__option">
+                                <p class="wtosearch__option--label">Trong Shop này</p>
+                                <i class="fas fa-angle-down wtosearch__option--icon"></i>
+                            </div>
+
+                            <ul class="wtosearch--list navbar__subnav">
+                                <li class="wtosearch--item">Trong Shop này <i
+                                        class="fas fa-check wtosearch--selected"></i></li>
+                                <li class="wtosearch--item">Trong Shopee</li>
+                            </ul>
+                        </div>
+                        <button class="navsearch__searchbar--searchbtn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="navsearch__recommend hide-on-tablet hide-on-mobile">
+                        <a href="" class="navsearch__recommend--button">Áo khoác</a>
+                        <a href="" class="navsearch__recommend--button">Váy</a>
+                        <a href="" class="navsearch__recommend--button">Quần</a>
+                        <a href="" class="navsearch__recommend--button">Tai nghe</a>
+                        <a href="" class="navsearch__recommend--button">Túi xách nữ</a>
+                        <a href="" class="navsearch__recommend--button">Chân váy</a>
+                        <a href="" class="navsearch__recommend--button">Dép</a>
+                        <a href="" class="navsearch__recommend--button">Bông tẩy trang </a>
+                    </div>
+                </div>
+                <div class="navsearch__cart">
+                    <div class="navsearch__cart--block navbar--button">
+                        <a href="https://shopee.vn/buyer/login?next=https%3A%2F%2Fshopee.vn%2F">
+                            <i class="fas fa-cart-arrow-down navsearch__cart--icon"></i>
+                        </a>
+                        <div class="usermode navsearch__cart--label">3</div>
+                        <!-- Cart Logout -->
+                        <!-- <div class="navsearch__cart--logout navbar__subnav">
+                            <div class="navsearch__cart--logout-icon"></div>
+                            <p class="navsearch__cart--logout-text">Chưa có sản phẩm</p>
+                        </div> -->
+                        <!-- Cart Login -->
+                        <div class="usermode navsearch__cart--login navbar__subnav">
+                            <div class="navsearch__cart--header hide-on-mobile">Sản phẩm mới thêm</div>
+                            <div class="navsearch__cart--body hide-on-mobile">
+                                <a class="navsearch__cart--item"
+                                   href="https://shopee.vn/-M%C3%A3-1010FASHIONSALE1-gi%E1%BA%A3m-10k-%C4%91%C6%A1n-t%E1%BB%AB-50k-Gi%C3%A0y-th%E1%BB%83-thao-n%E1%BB%AF-m%C3%A3-5555-r%C3%A1ch-i.4980129.4656566862">
+                                    <div class="navsearch__cart--image navsearch__cart--image-1"></div>
+                                    <div class="navsearch__cart--name">
+                                        [Đặc biệt] Giày thể thao nữ mã 5555 - Rạch, giảm 10K đơn từ 50K! Nhanh tay sắm
+                                        ngay!
+                                    </div>
+
+                                    <div class="navsearch__cart--price">₫133.000</div>
+                                </a>
+                                <div class="navsearch__cart--item">
+                                    <div class="navsearch__cart--image navsearch__cart--image-2"></div>
+                                    <div class="navsearch__cart--name">
+                                        [Chất lượng cao] Áo khoác dù kiểu Bomber thêu chữ BADGE. Size M, L, XL. Mẫu mã
+                                        AK153 từ TD Fashion.
+                                    </div>
+
+                                    <div class="navsearch__cart--price">₫140.000</div>
+                                </div>
+                                <div class="navsearch__cart--item">
+                                    <div class="navsearch__cart--image navsearch__cart--image-3"></div>
+                                    <div class="navsearch__cart--name">
+                                        [Mã SKAMSALE10 - Giảm 10% đơn 200K] Quần âu nam, quần tây nam màu đen Hàn Quốc.
+                                        Chất liệu co dãn, vải chống nhăn cao cấp, không bai, không xù.
+                                    </div>
+                                    <div class="navsearch__cart--price">₫92.000</div>
+                                </div>
+                            </div>
+                            <div class="navsearch__cart--footer hide-on-mobile">
+                                <div class="navsearch__cart--footer-btn">Xem giỏ hàng</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="user-mobile">
+                        <i class="fas fa-user user-mobile"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
+</html>

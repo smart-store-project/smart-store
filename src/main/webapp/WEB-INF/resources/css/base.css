@@ -1,0 +1,65 @@
+:root {
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --light-btn-primary-color: #fb5533;
+    --primary-color: #ee4d2d;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Noto Sans' , sans-serif;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    background-color: #f7f7f7;
+}
+
+
+
+.grid__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+}
+
+.grid__column-2 {
+    width: 16.6667%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.grid__column-3 {
+    width: 25%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.grid__column-4 {
+    width: 33.3333%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.grid__column-2-2 {
+    width: 20%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-top: 1rem;
+}
+
+.grid__column-8 {
+    width: 66.6667%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.grid__column-10 {
+    width: 83.3333%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}

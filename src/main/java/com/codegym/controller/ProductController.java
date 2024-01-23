@@ -101,7 +101,7 @@ public class ProductController {
                                       HttpSession session) {
         String searchLowerCase = search.trim().toLowerCase();
         Page<Product> products;
-        Pageable pageable = PageRequest.of(page, 5);
+        Pageable pageable = PageRequest.of(page, 1);
         session.setAttribute("search", search);
         session.setAttribute("typeSearch", typeSearch);
         switch (typeSearch) {
@@ -133,6 +133,7 @@ public class ProductController {
         ModelAndView view = new ModelAndView("product/list");
         view.addObject("products", products);
         return view;
+
     }
 
     @GetMapping("/brand/{brandId}")
