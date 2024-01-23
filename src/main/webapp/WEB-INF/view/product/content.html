@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="header_main::header"></header>
+<div class="container_main">
+    <div class="grid_content">
+        <!--Slider home banner-->
+        <div class="home-banner grid__row">
+            <div class="main-banner grid__column-8">
+                <div class="slider-container">
+                    <ul class="main-banner__list" id="slider-list">
+                        <li class="main-banner__items">
+                            <a href="#" class="main-banner__items-link">
+                                <img src="../resources/image/banner/banner.jpg" alt="Main banner"
+                                     class="main-banner__items-img">
+                            </a>
+                        </li>
+                        <li class="main-banner__items">
+                            <a href="#" class="main-banner__items-link">
+                                <img src="../resources/image/banner/banner1.jpg" alt="Main banner"
+                                     class="main-banner__items-img">
+                            </a>
+                        </li>
+                        <li class="main-banner__items">
+                            <a href="#" class="main-banner__items-link">
+                                <img src="../resources/image/banner/banner2.jpg" alt="Main banner"
+                                     class="main-banner__items-img">
+                            </a>
+                        </li>
+                        <li class="main-banner__items">
+                            <a href="#" class="main-banner__items-link">
+                                <img src="../resources/image/banner/banner3.jpg" alt="Main banner"
+                                     class="main-banner__items-img">
+                            </a>
+                        </li>
+                        <li class="main-banner__items">
+                            <a href="#" class="main-banner__items-link">
+                                <img src="../resources/image/banner/banner5.jpg" alt="Main banner"
+                                     class="main-banner__items-img">
+                            </a>
+                        </li>
+                        <li class="main-banner__items">
+                            <a href="#" class="main-banner__items-link">
+                                <<img src="../resources/image/banner/banner3.png" alt="Main banner"
+                                      class="main-banner__items-img">
+                            </a>
+                        </li>
+                        <li class="main-banner__items">
+                            <a href="#" class="main-banner__items-link">
+                                <img src="../resources/image/banner/banner6.png" alt="Main banner"
+                                     class="main-banner__items-img">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="radio-buttons">
+                        <input type="radio" name="slide-radio" id="radio1" onclick="changeSlide(0)" checked>
+                        <input type="radio" name="slide-radio" id="radio2" onclick="changeSlide(1)">
+                        <input type="radio" name="slide-radio" id="radio3" onclick="changeSlide(2)">
+                        <input type="radio" name="slide-radio" id="radio4" onclick="changeSlide(3)">
+                        <input type="radio" name="slide-radio" id="radio5" onclick="changeSlide(4)">
+                        <input type="radio" name="slide-radio" id="radio6" onclick="changeSlide(5)">
+                    </div>
+                    <button class="prev-button" onclick="prevSlide()">❮</button>
+                    <button class="next-button" onclick="nextSlide()">❯</button>
+
+                </div>
+            </div>
+            <div class="right-banner-wrapper grid__column-4">
+                <div class="sub-banner">
+                    <a href="#" class="sub-banner__link">
+                        <img src="../resources/image/banner/right-side-banner-1.jpg" alt="Right main banner"
+                             class="sub-banner__img" style="padding-bottom: 7px">
+                    </a>
+                </div>
+                <div class="sub-banner">
+                    <a href="#" class="sub-banner__link">
+                        <img src="../resources/image/banner/right-side-banner-2.jpg" alt="Right main banner"
+                             class="sub-banner__img">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Start of Suggestion Category -->
+        <div class="suggestion-category">
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/voucher-xtra.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Shopee Premium</div>
+            </a>
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/sale-time.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Khung giờ săn sale</div>
+            </a>
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/freeship.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Miễn phí có shopee</div>
+            </a>
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/super_cheap.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Shopee Siêu Rẻ</div>
+            </a>
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/discount-code.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Mã giảm giá</div>
+            </a>
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/outlet.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Hàng hiệu outlet giảm 50%</div>
+            </a>
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/service-voucher.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Nạp Thẻ, Dịch Vụ & E-Voucher</div>
+            </a>
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/what-number.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Nhận Free Voucher
+                    30.000Đ
+                </div>
+            </a>
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/global.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Hàng quốc tế</div>
+            </a>
+            <a href="#" class="suggestion-category__items">
+                <img src="../resources/image/suggestion-category/fire.png" alt="Icon"
+                     class="suggestion-category__items-icon">
+                <div class="suggestion-category__items-content">Bắt trend-Qúa sốc</div>
+            </a>
+        </div>
+        <!-- End of Suggestion Category -->
+        <!--Start of main brand-->
+        <div class="category-container">
+            <h2 class="category-title">Danh Sách Nhãn Hàng</h2>
+
+            <div class="brand-container">
+                <div class="brand">
+                    <a href="/path/to/brand/1" target="_blank">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
+                        <p class="brand-name">Nhãn Hàng 1</p>
+                    </a>
+                </div>
+                <div class="brand">
+                    <a href="/path/to/brand/1" target="_blank">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
+                        <p class="brand-name">Nhãn Hàng 1</p>
+                    </a>
+                </div>
+                <div class="brand">
+                    <a href="/path/to/brand/1" target="_blank">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
+                        <p class="brand-name">Nhãn Hàng 1</p>
+                    </a>
+                </div>
+                <div class="brand">
+                    <a href="/path/to/brand/1" target="_blank">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
+                        <p class="brand-name">Nhãn Hàng 1</p>
+                    </a>
+                </div>
+                <div class="brand">
+                    <a href="/path/to/brand/1" target="_blank">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
+                        <p class="brand-name">Nhãn Hàng 1</p>
+                    </a>
+                </div>
+
+
+                <!-- Thêm các nhãn hàng khác tại đây -->
+
+            </div>
+        </div>
+        <!--Start of main category-->
+        <div class="main-category">
+            <div class="main-category__header">
+                danh mục
+            </div>
+
+
+            <div class="main-category__list">
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Thời trang nam</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/phone.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Điện thoại và phụ kiện</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/screen.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Thiết bị điện tử</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/laptop.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Máy tính & Laptop</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/camera.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Máy ảnh và máy quay phim</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/watch.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Đồng Hồ</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/man-shoe.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Giày dép nam</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Thiết bị điện gia dụng</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Thể thao & du lịch</div>
+                    </a>
+                </div>
+                <div class="main-category__item" ..>
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Ô tô & xe máy & xe đạp</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Thời trang nữ</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Mẹ & bé</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Nhà cửa & đời sống</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Sắc đẹp</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Sức khỏe</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Giày dép nữ</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Túi ví nữ</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Phụ kiện & trang sức nữ</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Bách hóa online</div>
+                    </a>
+                </div>
+                <div class="main-category__item">
+                    <a href="#" class="main-category__item-link">
+                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                             class="main-category__item-img">
+                        <div class="main-category__item-text">Nhà sách online</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--Start of product list-->
+        <div class="product-list">
+            <div class="product-list__header">
+                <p>Sản phẩm</p>
+            </div>
+            <div class="product-list__items">
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-item__details">
+                        <div class="product-item__image">
+                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
+                                 alt="Product Image">
+                        </div>
+                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
+                        <div class="product-item__price">
+                            <sub>đ</sub>75.000
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button class="body-loadMore" type="button">Xem thêm</button>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="footer_main::footer"></footer>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelector('#slider-list');
+    const totalSlides = document.querySelectorAll('.main-banner__items').length;
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlide();
+        updateRadioButtons();
+    }
+
+    function changeSlide(index) {
+        currentSlide = index;
+        updateSlide();
+    }
+
+    function updateSlide() {
+        const newTransformValue = -currentSlide * 100 + '%';
+        slides.style.transform = `translateX(${newTransformValue})`;
+    }
+
+    function updateRadioButtons() {
+        const radioButtons = document.querySelectorAll('input[name="slide-radio"]');
+        radioButtons.forEach((radio, index) => {
+            radio.checked = index === currentSlide;
+        });
+    }
+
+    setInterval(nextSlide, 3000);
+</script>
+</body>
+</html>

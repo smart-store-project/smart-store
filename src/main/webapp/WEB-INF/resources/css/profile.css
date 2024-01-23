@@ -1,0 +1,223 @@
+.profile-body{
+    width: 1151px;
+    margin: 20px auto 50px auto;
+    display: grid;
+    grid-template-columns: 180px auto;
+    justify-content: space-between;
+}
+.profile-body-left-user-info{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #efefef;
+}
+.profile-user-avatar{
+    width: 48px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile-user-username{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 1.5rem;
+}
+.profile-user-username-text{
+    font-weight: 600;
+}
+.profile-user-username-edit{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.profile-user-username-edit span{
+    color: #9999a6;
+    font-size: 14px;
+}
+.profile-icon{
+    width: 16px;
+    height: 16px;
+}
+
+.profile-body-left-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    margin-top: 13px;
+}
+.profile-body-left-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+}
+.profile-body-left-menu-item span{
+    font-size: var(--text-color);
+}
+.profile-body-left-menu-item:hover span{
+    color:var(--primary-color);
+}
+.profile-body-left-menu-item-option {
+    display: flex;
+    flex-direction: column;
+    margin: 4px 0 0 25px;
+    gap: 5px;
+}
+.profile-body-left-menu-item-option-item{
+    font-size: 1.5rem;
+}
+.profile-body-left-menu-item-option-item:hover{
+    color: var(--primary-color);
+}
+.profile-body-right{
+    position: relative;
+    overflow: hidden;
+}
+.profile-body-right-my-profile{
+    padding: 15px 15px;
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.profile-body-right-my-profile-title{
+    font-size: 2rem;
+}
+
+.profile-body-right-transfer{
+    height: 750px;
+    overflow-y: scroll;
+    overflow-x: visible;
+    width: 995px;
+    background-color: #fff;
+}
+.profile-body-right-transfer::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
+.profile-edit-form-content{
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    padding: 30px 0 70px 0;
+    gap: 50px;
+}
+.profile-edit-form-content-left{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.profile-edit-form-content-left-field{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    font-size: 1.8rem;
+}
+.profile-edit-form-content-title{
+    min-width: 20%;
+    text-align: right;
+    color: #777777;
+    font-size: 1.3rem;
+}
+
+.profile-edit-form-content-input{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    font-size: 1.4rem;
+}
+.profile-edit-form-content-input input {
+    padding: 10px;
+    outline: unset;
+    border: 1px solid #dbdbdb;
+    width: 100%;
+    border-radius: 2px;
+}
+.profile-edit-form-content-input input:hover{
+    border: 1px solid #000000;
+
+}
+.profile-edit-field-action{
+    min-width: 55px;
+    color:  #2d77dd;
+    cursor: pointer;
+    user-select: none;
+}
+.profile-gender-input-radio{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.profile-gender-input-radio label{
+    margin: 0;
+}
+.profile-edit-form-content-title{
+    position: relative;
+    width: 150px;
+    user-select: none;
+}
+
+.profile-birthday-list-value-number-choice select {
+    padding: 5px 5px 5px 10px;
+    cursor: pointer;
+    width: 120px;
+    border: 1px solid #dbdbdb;
+}
+
+.profile-birthday-list-value-number-choice select:hover {
+    background-color: #efefef;
+}
+
+.profile-content-birthday-option {
+    position: relative;
+    width: 150px;
+    user-select: none;
+}
+.profile-edit-save-btn {
+    padding: 10px 24px;
+    background-color: #ee4d2d;
+    border: unset;
+    outline: unset;
+    border-radius: 2px;
+    color: white;
+    user-select: none;
+    cursor: pointer;
+}
+.profile-edit-form-content-right{
+    overflow: hidden;
+}
+.profile-edit-form-content-right img{
+    width: 130px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-top: 15px;
+    object-fit: cover;
+}
+.profile-edit-limit-require{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 1.1rem;
+    color: #9999a6;
+}
+.profile-edit-form-content-right-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1px solid #efefef;
+    gap: 15px;
+ }
+#profile-edit-choose-avatar {
+    border: 1px solid #e8e8e8;
+    padding: 10px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 100ms;
+    box-shadow: 0 1px 1px 0 #00000017;
+}
+#profile-edit-choose-avatar:hover {
+    background-color: #fafafa;
+}

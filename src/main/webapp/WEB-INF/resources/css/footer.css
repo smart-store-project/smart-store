@@ -1,0 +1,137 @@
+
+
+.footer__app {
+    display: inline-flex;
+   margin: 0 auto;
+}
+
+.footer__app--space {
+    height: 2px;
+    background-color: var(--primary-color);
+    border-bottom: 1px solid rgba(0,0,0,.09);
+}
+
+
+.footer__app--title {
+    font-size: 12px;
+    color: rgba(0,0,0,.54);
+    font-weight: 700;
+    margin: 40px 0 20px 15px;
+
+}
+
+.footer__app--list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    margin-left: 15px;
+}
+
+.footer__app--list li {
+    margin: 0 0 12px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.footer__app--item {
+    text-decoration: none;
+    font-size: 12px;
+    color: rgba(0,0,0,.54);
+}
+
+.footer__app--item:hover {
+    color: #ee4d2d;
+}
+
+.footer__app--icon {
+    font-size: 2rem;
+    width: 24px;
+    color: rgba(0,0,0,.54);
+}
+
+.footer__app--download {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    margin-left: 15px;
+}
+
+.footer__app--qrcode {
+    width: 40%;
+    height: 40%;
+    border: 1rem solid rgba(0,0,0,.09);
+    margin-right: 15px;
+}
+
+.footer__app--link {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.footer__app--link-icon {
+
+
+    height: 30%;
+}
+
+.footer__national {
+    display: inline-flex;
+    font-size: 1.5rem;
+    color: rgba(0,0,0,.54);
+    padding: 40px 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+    align-items: flex-start;
+}
+
+.copyright {
+    display: flex;
+    justify-content: space-between;
+}
+
+.national-area--list {
+    display: inline-flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+    margin: 0 0 0 0px;
+    justify-content: center;
+}
+
+.national-area--item {
+    padding: 0 5px 0;
+    border-right: 1px solid rgba(0,0,0,.2);
+    white-space: pre-wrap;
+}
+
+.national-area--item a {
+    text-decoration: none;
+
+    color: rgba(0,0,0,.54);
+}
+
+.company {
+    display: flex;
+    align-items: center;
+    padding: 42px 0 37px;
+    flex-direction: column;
+    font-size: 1.2rem;
+}
+
+.company__policy {
+    margin-bottom: 40px;
+}
+
+.company__policy--item {
+    padding: 0 2.5rem;
+    color: rgba(0,0,0,.54);
+    cursor: pointer;
+}
+
+.company__policy--item + .company__policy--item {
+    border-left: 1px solid rgba(0,0,0,.09);
+}
+
+.company-registed {
+    font-weight: 600;
+}

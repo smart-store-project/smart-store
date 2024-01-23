@@ -1,0 +1,65 @@
+.register-header-bar-item-need-help{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    margin-left: auto;
+}
+.register-text{
+    font-size: 2.4rem;
+    margin-left: 20px;
+}
+.register-container-item-1-top-logo{
+    height: 70%;
+    width: 340px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.register-container-content-item-2-form-body-item-1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px;
+    padding: 0px 30px;
+    position: relative;
+}
+.register-content-item-2-form {
+    width: 400px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 1%;
+    display: flex;
+    flex-direction: column;
+}
+.register-content-item-2-form-header{
+    height: 70px;
+    display: flex;
+    padding: 10px 30px;
+}
+.register-container-content-item-2-form-body{
+    height: 390px;
+    display: flex;
+    flex-direction: column;
+
+}
+.register-container-content-item-2-form-body-item-2-top{
+    flex: 1;
+
+    text-align: center;
+    width: 100%;
+    padding-top: 10px;
+}
+.register-container-content-item-2-form-body-item-2-top-item{
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+.register-container-content-item-2-form-body-item-2-top-item-link{
+    text-decoration: inherit;
+    color: var(--primary-color);
+}
+.register-container-content-item-2-form-header-item1 {
+    flex: 1;
+    font-size: 1.8rem;
+    text-align: left;
+    line-height: 59px;
+}

@@ -20,7 +20,11 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
 //                    "INNER JOIN brand ON brand.id = category.brand_id " +
 //                    "WHERE brand.name = :brandName")
 //    List<Product> findProductByBrandName(@Param("brandName") String brandName);
-
+@Query("SELECT p FROM Product p " +
+        "JOIN p.category c " +
+        "JOIN c.brand b " +
+        "WHERE b = :brand AND c = :category")
+Page<Product> findProductsByBrandAndCategory(@Param("brand") Brand brand, @Param("category") Category category, Pageable pageable);
     @Query(nativeQuery = true,
             value = "SELECT * FROM product " +
                     "INNER JOIN category ON product.category_id = category.id " +
@@ -57,4 +61,7 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
             "JOIN c.brand b " +
             "WHERE b = :brand")
     Page<Product> findProductByBrand(Brand brand, Pageable pageable);
+
+
+
 }

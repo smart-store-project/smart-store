@@ -28,6 +28,11 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public Page<Product> findProductsByBrandAndCategory(Brand brand, Category category, Pageable pageable) {
+        return productRepository.findProductsByBrandAndCategory(brand, category, pageable);
+    }
+
+    @Override
     public List<Product> findAllByBrand(Brand brand) {
         Iterable<Category> categories = categoryRepository.findAllByBrand(brand);
         List<Product> result = new ArrayList<>();
