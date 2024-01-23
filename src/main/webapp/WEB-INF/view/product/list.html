@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Product</title>
+</head>
+<body>
+
+<div style="margin-bottom: 10px; margin-left: 110px;">
+    <form th:action="@{/products/search}" method="get">
+        <label for="search">Search</label>
+        <input type="text" name="search" id="search" th:value="${search}">
+        <label for="typeSearch">Search by</label>
+        <input type="hidden" name="page" th:value="${page}">
+        <select name="typeSearch" id="typeSearch">
+            <option value="productName">Product Name</option>
+            <option value="brandName">Brand Name</option>
+            <option value="categoryName">Category Name</option>
+            <option value="categoryNameAndBrandName">Category Name and Brand name</option>
+        </select>
+        <input type="submit" value="Search">
+    </form>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Category:</th>
+        <th>Picture:</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td>
+            <a th:href="@{/categories/{id}/view(id=${category.id})}" th:text="${category != null ? category.name : ''}"
+               style="text-decoration: none"></a>
+        </td>
+        <td>
+            <a th:href="@{/categories/{id}/view(id=${category.id})}">
+                <img th:if="${category != null}" th:src="${category.imgURL}" alt=""/>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Brand:</th>
+        <th>Picture:</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="brand : ${brands}">
+        <td>
+            <a th:href="@{/brands/{id}/view(id=${brand.id})}" th:text="${brand != null ? brand.name : ''}"
+               style="text-decoration: none"></a>
+        </td>
+        <td>
+            <img th:href="@{/brands/{id}/view(id=${brand.id})}" th:if="${brand != null}" th:src="${brand.imgURL}"
+                 alt=""/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Picture</th>
+        <th>Category</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product != null ? product.name : ''}"></td>
+        <td th:text="${product != null ? product.description : ''}"></td>
+        <td th:text="${product != null ? product.price : ''}"></td>
+        <td>
+            <img th:if="${product != null}" th:src="${product.imgURL}" alt=""/>
+        </td>
+        <td th:text="${product != null ? product.category.name : ''}"></td>
+    </tr>
+    </tbody>
+</table>
+<a class="btn btn-primary" th:if="${products.hasPrevious()}"
+   th:href="@{/products/search(page=${products.number == 0 ? 0 : products.number - 1},search=${session.search},typeSearch=${typeSearch})}">Previous</a>
+<span th:text="${products.number + 1}"></span> | <span th:text="${products.totalPages}"></span>
+<a class="btn btn-primary" th:if=" ${products.hasNext()}"
+   th:href="@{/products/search(page=${products.number + 1},search=${session.search},typeSearch=${typeSearch})}">Next</a>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sorted Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Sorted Products</h1>
+
+<div>
+    <a th:href="@{/products/view/sort?sortType=name}" class="btn btn-info" role="button">Sort Product By Name</a>
+    <a th:href="@{/products/view/sort?sortType=priceDesc}" class="btn btn-info" role="button">Sorted Product By Increase
+        Price</a>
+    <a th:href="@{/products/view/sort?sortType=priceAsc}" class="btn btn-info" role="button">Sorted Product By Decrease
+        Price</a>
+</div>
+
+<p th:if="${sortType == 'name'}">Sorted Product By Name</p>
+<p th:if="${sortType == 'priceDesc'}">Sorted Product By Increase Price</p>
+<p th:if="${sortType == 'priceAsc'}">Sorted Product By Decrease Price</p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Picture</th>
+        <th>Category</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="product : ${sortedProducts}">
+        <td th:text="${product != null ? product.name : ''}"></td>
+        <td th:text="${product != null ? product.description : ''}">
+        </td>
+        <td th:text="${product != null ? product.price : ''}"></td>
+        <td>
+            <img th:if="${product != null}" th:src="${product.imgURL}" alt=""/>
+        </td>
+        <td th:text="${product != null ? product.category.name : ''}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

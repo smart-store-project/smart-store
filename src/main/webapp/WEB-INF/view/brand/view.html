@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brand Details</title>
+</head>
+<body>
+<h1>Brand Details</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Category:</th>
+        <th>Picture:</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td>
+            <a th:href="@{/categories/{id}/view(id=${category.id})}" th:text="${category != null ? category.name : ''}"
+               style="text-decoration: none"></a>
+        </td>
+        <td>
+            <a th:href="@{/categories/{id}/view(id=${category.id})}">
+                <img th:if="${category != null}" th:src="${category.imgURL}" alt=""/>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<table>
+    <tr>
+        <td colspan="2">
+            <h2>List product of this brand</h2>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Picture</th>
+                    <th>Category</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product != null ? product.name : ''}"></td>
+                    <td th:text="${product != null ? product.description : ''}"></td>
+                    <td th:text="${product != null ? product.price : ''}"></td>
+                    <td>
+                        <img th:if="${product != null}" th:src="${product.imgURL}" alt=""/>
+                    </td>
+                    <td th:text="${product != null ? product.category.name : ''}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
