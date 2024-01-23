@@ -1,3 +1,4 @@
 # smart-store
 # team members:
-## Viet Vu
+## 1. Hieu Nguyen
+## 2. Viet Vu
