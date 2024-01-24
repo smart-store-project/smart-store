@@ -30,6 +30,11 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    public Category findByName(String name) {
+        return categoryRepository.findByName(name);
+    }
+
+    @Override
     public Iterable<Category> findAll() {
         return categoryRepository.findAll();
     }

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="login-header">
+    <div class="login-header-bar">
+        <div class="login-bar-item">
+            <a href="https://shopee.vn/" class="flex items-end text-white no-underline mr-5">
+                <i class="fab fa-shopify text-7xl md:text-6xl" style="color: #ee4d2d"></i>
+                <div class="pl-2 text-xs md:text-4xl whitespace-nowrap  md:block mb-3" style="color: #ee4d2d">
+                    Smart-Shop
+                </div>
+            </a>
+            </a>
+            <div class="login-item-link">
+                <p class="register-text">Đăng ký</p>
+            </div>
+        </div>
+        <div class="login-bar-item">
+            <a href="" class="register-header-bar-item-need-help"
+            >Bạn cần giúp đỡ?</a
+            >
+        </div>
+    </div>
+</div>
+
+<div class="login-container">
+    <div class="login-container-content">
+        <div class="login-content-item">
+            <div class="login-container-item-1-top">
+                <div class="login-container-item-1-top-logo">
+                    <img src="/resources/image/shopee-icon-white.png" alt="Logo">
+                </div>
+            </div>
+            <div class="login-container-item-1-bottom">
+                <div class="login-container-item-1-bottom-text">
+                    Nền tảng thương mại điện tử <br/>
+                    yêu thích ở Đông Nam Á & Đài Loan
+                </div>
+            </div>
+        </div>
+
+        <div class="login-content-item login-content-item-2">
+            <form action="hello-servlet" class="register-content-item-2-form" method="post">
+                <div class="register-content-item-2-form-header">
+                    <div class="register-container-content-item-2-form-header-item1">
+                        Đăng Ký
+                    </div>
+                </div>
+                <div class="register-container-content-item-2-form-body">
+                    <div class="register-container-content-item-2-form-body-item-1">
+                        <input type="text" name="username" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Username" required />
+                        <input type="email" name="email" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Email" required />
+
+                        <div class="login-container-content-item-2-form-body-item-1-passwordBox">
+                            <input type="password" class="login-container-content-item-2-form-body-item-1-inputPassword" placeholder="Mật khẩu" name="login-password" id="passwordInput" required  />
+                            <div class="login-container-content-item-2-form-body-item-1-inputPassword-eyeIcon" onclick="togglePasswordVisibility()">
+                                <div class="login-container-content-item-2-form-body-item-1-inputPassword-openEyeIcon"></div>
+                            </div>
+                        </div>
+                        <input type="number" name="phoneNumber" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="phoneNumber" required />
+                        <input type="text" name="address" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Address" required />
+
+                        <button type="submit" class="login-container-content-item-2-form-body-item-1-submitLogin">
+                            ĐĂNG KÝ
+                        </button>
+                    </div>
+                    <div class="login-container-content-item-2-form-body-item-2">
+                        <div class="login-container-content-item-2-form-body-item-2-top">
+                            <a href="#" class="login-container-content-item-2-form-body-item-2-top-item">Quên mật khẩu</a>
+                            <a href="#" class="login-container-content-item-2-form-body-item-2-top-item">Đăng nhập với SMS</a>
+                        </div>
+                        <div class="login-container-content-item-2-form-body-item-2-middle">
+                            <div class="login-container-content-item-2-form-body-item-2-middle-side"></div>
+                            <div class="login-container-content-item-2-form-body-item-2-middle-center">
+                                HOẶC
+                            </div>
+                            <div class="login-container-content-item-2-form-body-item-2-middle-side"></div>
+                        </div>
+                        <div class="login-container-content-item-2-form-body-item-2-bottom">
+                            <a href="#" class="login-container-content-item-2-form-body-item-2-bottom-loginByFB">
+                                <div class="login-container-content-item-2-form-body-item-2-bottom-loginByFB-icon">
+                                    <img src="/resources/image/facebook-icon.png" alt="Facebook Icon">
+                                </div>
+                                <div class="login-container-content-item-2-form-body-item-2-bottom-loginByFB-text">
+                                    Facebook
+                                </div>
+                            </a>
+                            <a href="#" class="login-container-content-item-2-form-body-item-2-bottom-loginByGG">
+                                <div class="login-container-content-item-2-form-body-item-2-bottom-loginByGG-icon">
+                                    <img src="/resources/image/Google-icon.png" alt="Google Icon" class="icon-img">
+                                </div>
+                                <div class="login-container-content-item-2-form-body-item-2-bottom-loginByGG-text">
+                                    Google
+                                </div>
+                            </a>
+                        </div>
+                        <div class="register-container-content-item-2-form-body-item-2-top">
+                            <p class="register-container-content-item-2-form-body-item-2-top-item">
+                                Bằng việc đăng kí, bạn đã đồng ý với Shopee về <br />
+                                <a class="register-container-content-item-2-form-body-item-2-top-item-link" href="https://help.shopee.vn/portal/article/77243">Điều khoản dịch vụ</a>
+                                &
+                                <a class="register-container-content-item-2-form-body-item-2-top-item-link" href="https://help.shopee.vn/portal/article/77244">Chính sách bảo mật</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="login-container-content-item-2-form-footer">
+                    <div class="login-container-content-item-2-form-footer-text">
+                        Bạn dã có tài khoản?
+                        <a href="http://127.0.0.1:5500/register.html" class="login-container-content-item-2-form-footer-text-registerLink">Đăng Nhập</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="footer_main::footer"></footer>
+</body>
+</html>

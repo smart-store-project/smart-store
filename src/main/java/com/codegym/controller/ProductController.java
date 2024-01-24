@@ -33,7 +33,7 @@ public class ProductController {
 
     @GetMapping("")
     public ModelAndView showAllProduct() {
-        ModelAndView view = new ModelAndView("product/list");
+        ModelAndView view = new ModelAndView("product/content");
         view.addObject("products", productService.findAll());
         return view;
     }
@@ -83,7 +83,7 @@ public class ProductController {
     @GetMapping("/{id}/brand")
     public ModelAndView findProductByBrand(@PathVariable Long id) {
         List<Product> products = productService.findAllByBrand(brandService.findById(id));
-        ModelAndView view = new ModelAndView("product/list");
+        ModelAndView view = new ModelAndView("product/content");
         view.addObject("products", products);
         return view;
     }
@@ -91,7 +91,7 @@ public class ProductController {
     @GetMapping("/{id}/category")
     public ModelAndView findProductByCategory(@PathVariable Long id) {
         List<Product> products = productService.findAllByCategory(categoryService.findById(id));
-        ModelAndView view = new ModelAndView("product/list");
+        ModelAndView view = new ModelAndView("product/content");
         view.addObject("products", products);
         return view;
     }
@@ -100,8 +100,9 @@ public class ProductController {
     public ModelAndView searchProduct(@RequestParam("search") String search, @RequestParam("typeSearch") String typeSearch, @RequestParam(value = "page", defaultValue = "0") int page,
                                       HttpSession session) {
         String searchLowerCase = search.trim().toLowerCase();
+        ModelAndView view = new ModelAndView("header_main");
         Page<Product> products;
-        Pageable pageable = PageRequest.of(page, 1);
+        Pageable pageable = PageRequest.of(page, 5);
         session.setAttribute("search", search);
         session.setAttribute("typeSearch", typeSearch);
         switch (typeSearch) {
@@ -110,16 +111,22 @@ public class ProductController {
                 break;
             case "brandName":
                 products = productService.searchProductByBrandName(searchLowerCase, pageable);
-                break;
+                Brand brand = brandService.findByName(search);
+                view.addObject("products", products.getContent());
+                view.addObject("typeSearch", typeSearch);
+                return new ModelAndView("redirect:/brands/" +brand.getId()+"/view");
             case "categoryName":
                 products = productService.searchProductByCategoryName(searchLowerCase, pageable);
-                break;
+                Category category = categoryService.findByName(search);
+                view.addObject("products", products.getContent());
+                view.addObject("typeSearch", typeSearch);
+                return new ModelAndView("redirect:/categories/" + category.getId() + "/view");
             default:
                 products = productService.searchProduct(searchLowerCase, pageable);
         }
-        ModelAndView view = new ModelAndView("product/list");
         view.addObject("products", products);
         view.addObject("typeSearch", typeSearch);
+        view.setViewName("product/content");
         return view;
     }
 
@@ -130,7 +137,7 @@ public class ProductController {
         Pageable pageable = PageRequest.of(0, 1, sort);
         Category category = categoryService.findById(categoryId);
         Iterable<Product> products = productService.findProductByCategory(category, pageable);
-        ModelAndView view = new ModelAndView("product/list");
+        ModelAndView view = new ModelAndView("product/content");
         view.addObject("products", products);
         return view;
 
@@ -142,7 +149,7 @@ public class ProductController {
         Pageable pageable = PageRequest.of(0, 1, sort);
         Brand brand = brandService.findById(brandId);
         Iterable<Product> products = productService.findProductByBrand(brand, pageable);
-        ModelAndView view = new ModelAndView("product/list");
+        ModelAndView view = new ModelAndView("product/content");
         view.addObject("products", products);
         return view;
     }

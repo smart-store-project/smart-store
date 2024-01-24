@@ -182,116 +182,48 @@
 }
 
 
-.navsearch__with-search {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    position: relative;
-}
-
-.navsearch__searchbar {
-    padding: 3px;
-    background-color: var(--white-color);
-    height: 40px;
-    border-radius: 2px;
-    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 9%);
-    display: flex;
-    flex-wrap: nowrap;
-}
-
 .navsearch__searchbar--main {
-    padding-left: 1rem;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     width: 100%;
+    position: relative; /* Thêm dòng này */
 }
-
 .navsearch__searchbar--input {
-    width: 100%;
+    flex-grow: 1;
     height: 3.4rem;
-    outline: none;
+    width: 604px;
     border: none;
     font-size: 1.4rem;
-    opacity: 0.8;
-
-}
-.navsearch__history {
-    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 26%);
+    /* opacity: 0.8; */
+    padding-right: 10rem;
+    background: #fff;
 }
 
-.wtosearch {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
 
-.wtosearch__option {
-    display: flex;
-    font-size: 14px;
-    padding: 0 10px 0 15px;
-    border-left: 1px solid rgba(0,0,0,.09);
-    white-space: nowrap;
-    height: 75%;
-    align-items: center;
-    color: rgba(0,0,0,.87);
-}
 
-.wtosearch__option--label {
-    margin: 0;
-    display: inline-block;
-}
-
-.wtosearch__option--icon {
-    margin-left: 15px;
-}
-
-.wtosearch--list {
-    z-index: 2;
-    position: absolute;
-    top: 4.2rem;
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-    flex-direction: column;
-    background-color: #fff;
-    max-width: 15rem;
-    width: 100%;
-    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 5%);
-    display: none;
-}
-
-.wtosearch--item {
-    display: inline-flex;
-    padding: 0 10px 0 15px;
-    height: 45px;
-    font-size: 14px;
-    white-space: nowrap;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-}
-
-/* .wtosearch:hover .wtosearch--list {
-   display: block;
-} */
-
-.wtosearch--selected {
-    margin-left: 15px;
-    color: #ee4d2d;
+.navsearch__searchbar--select {
+    position: absolute; /* Thêm dòng này */
+    right: 5.5rem; /* Thêm dòng này */
+    height: 3.4rem;
+    font-size: 1.4rem;
+    outline: none;
+    border: none;
 }
 
 
 .navsearch__searchbar--searchbtn {
+    position: absolute; /* Thêm dòng này */
+    right: 0; /* Thêm dòng này */
     font-size: 14px;
     border: none;
     padding: 0 24px;
     background-color: #fb5533;
     color: var(--white-color);
     height: 34px;
+    cursor: pointer;
 }
-
 .navsearch__searchbar--searchbtn:hover {
     opacity: 0.85;
-    cursor: pointer;
 }
 
 .navsearch__history {
@@ -301,16 +233,10 @@
     background-color: var(--white-color);
     z-index: 1;
     display: none;
-    margin-left: -3px;
     margin-left: -1.3rem;
-    background-color: transparent;
 }
 
-.navsearch__history--content {
-    background-color: var(--white-color);
 
-    border-radius: 2px;
-}
 
 .navsearch__history--prefill {
     padding: 10px 15px 10px 10px;

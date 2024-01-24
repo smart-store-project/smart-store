@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Shop</title>
+</head>
+<body>
+<header th:replace="header_main::header"></header>
+<div class="container_shop">
+    <div class="container_shop-grid1 justify-stretch gap-20">
+        <div class="container_shop-column grow">
+            <p style="background-color: #eee;font-size: 40px;margin-bottom: 50px;color: #FF0000;font-weight: bold;text-shadow: 1px 1px #000000;text-align: center;">
+                Category Name
+            </p>
+
+            <div class="container_shop-home-filter">
+
+                <div class="container_shop-home-filter-control">
+                    <p class="container_shop-home-filter-title">Sắp xếp theo</p>
+                    <button class="btn-shop btn--primary home-filter-btn">Phổ biến</button>
+                    <button class="btn-shop home-filter-btn">Mới nhất</button>
+                    <button class="btn-shop home-filter-btn">Bán chạy</button>
+                    <div class="btn-shop container_shop-home-filter-sort">
+                        <p class="home-filter-sort-btn">Giá</p>
+                        <i class="fas fa-sort-amount-down-alt" style="font-size: 1.5rem"></i>
+                        <ul class="container_shop-home-filter-sort-list">
+                            <li>
+                                <a href="#" class="container_shop-home-filter-sort-item-link">
+                                    Giá: thấp đến cao
+                                    <i class="fas fa-sort-amount-down-alt"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="container_shop-home-filter-sort-item-link">
+                                    Tăng dần
+                                    <i class="fas fa-sort-amount-up-alt"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container_shop-home-filter-page">
+                    <div class="container_shop-home-filter-page-number">
+                        <a class="btn btn-primary" th:if="${products.hasPrevious()}"
+                           th:href="@{/categories/{categoryId}/view(page=${products.previousPageable().pageNumber}, categoryId=${id})}">Trang trước</a>
+
+                        <p class="container_shop-home-filter-now" th:text="${products.number + 1}"></p>
+                        / <span th:text="${products.totalPages}"></span>
+
+                        <a class="btn btn-primary" th:if="${products.hasNext()}"
+                           th:href="@{/categories/{categoryId}/view(page=${products.nextPageable().pageNumber}, categoryId=${id})}">Trang sau</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container_shop-home-product">
+                <div class=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
+                    <div class="product-item__box w-full" th:each="product : ${products}">
+                        <div class="product__img">
+                            <img th:if="${product != null}" th:src="${product.imgURL}" style="font-size: 50px"/>
+                            <img src="/resources/image/overlay.png" alt="">
+                            <div class="product__img-favourite-label">
+                                <p>Yêu thích</p>
+                            </div>
+                            <div class="product__img-discount">
+                                <p class="product__img-discount-percent">55%</p>
+                                <p class="product__img-discount-reduce">GIẢM</p>
+                            </div>
+                        </div>
+                        <div class="product__info">
+                            <p class="product__info--name" th:text="${product != null ? product.name : ''}"></p>
+                            <span class="product__info--price" th:text="${product != null ? product.price : ''}"></span>
+                            <div class="product__quality">
+                                <i class="far fa-heart product__quality--like"></i>
+                                <div class="product__quality--fivestar">
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                </div>
+                                <span class="product__quality--sold">Đã bán 640</span>
+                            </div>
+                            <span class="product__info--place">Hà Nội</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="footer_main::footer"></footer>
+</body>
+</html>
