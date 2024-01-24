@@ -6,6 +6,10 @@ import com.codegym.model.Product;
 import com.codegym.service.IBrandService;
 import com.codegym.service.ICategoryService;
 import com.codegym.service.IProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,15 +47,25 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}/view")
-    public ModelAndView findCategory(@PathVariable Long id) {
+    public ModelAndView findCategory(@PathVariable Long id, Pageable pageable) {
         Category category = categoryService.findById(id);
         List<Product> products = productService.findAllByCategory(category);
+
+        int page = Math.max(pageable.getPageNumber(), 0);
+        pageable = PageRequest.of(page, 1);
+
+        int start = (int) pageable.getOffset();
+
+        int end = Math.min((start + pageable.getPageSize()), products.size());
+
+        Page<Product> productsPage = new PageImpl<>(products.subList(start, end), pageable, products.size());
+
         ModelAndView view = new ModelAndView("category/category-view");
         view.addObject("category", category);
-        view.addObject("products", products);
+        view.addObject("products", productsPage);
+
         return view;
     }
-
     @GetMapping("/{id}/brand")
     public ModelAndView getCategoryByBrand(@PathVariable Long id) {
         Brand brand = brandService.findById(id);
