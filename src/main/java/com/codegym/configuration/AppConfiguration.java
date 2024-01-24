@@ -1,5 +1,6 @@
 package com.codegym.configuration;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -14,6 +15,9 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -35,6 +39,7 @@ import java.util.Properties;
 @EnableJpaRepositories("com.codegym.repository")
 @EnableSpringDataWebSupport
 @ComponentScan(basePackages = "com.codegym")
+@EnableScheduling
 public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAware {
     private ApplicationContext context;
 
@@ -91,9 +96,13 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/smart_shop");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/smart_shop_V03");
         dataSource.setUsername("root");
+<<<<<<< HEAD
         dataSource.setPassword("D@ll123456");
+=======
+        dataSource.setPassword("Modicung2486!");
+>>>>>>> a492a7488109bf583a333a1bdfdd73f1d5a7b90a
         return dataSource;
     }
 
@@ -117,5 +126,15 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
                 .addResourceLocations("/WEB-INF/resources/")
                 .setCachePeriod(3600)
                 .resourceChain(true);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

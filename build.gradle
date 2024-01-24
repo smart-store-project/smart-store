@@ -14,8 +14,8 @@ ext {
     junitVersion = '5.9.2'
 }
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = '19'
+targetCompatibility = '19'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -41,9 +41,15 @@ dependencies {
     implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.6.10.Final'
     implementation group: 'org.springframework', name: 'spring-tx', version: '5.3.23'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.2'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.2'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.10.Final'
     implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.5'
+    implementation 'org.modelmapper:modelmapper:2.4.4'
+    implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.8.0'
+    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.8.0'
+    implementation group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.8.0'
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.1.0.RELEASE'
 
 }
 
