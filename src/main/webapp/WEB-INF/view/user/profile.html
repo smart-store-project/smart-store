@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="overlay" id="overlay"></div>
+
+<header th:replace="header_main::header"></header>
+<div class="profile-body">
+    <div class="profile-body-left">
+        <div class="profile-body-left-user-info">
+            <img class="profile-user-avatar" src="/resources/image/User-Avatar-PNG-Transparent-Image.png"
+                 alt="">
+            <div class="profile-user-username">
+                <div class="profile-user-username-text">Đình Hiếu</div>
+                <div class="profile-user-username-edit">
+                    <div class="profile-icon">
+                        <i class="fa-solid fa-pencil"></i>
+                    </div>
+                    <span> Change Profile</span>
+                </div>
+            </div>
+        </div>
+        <div class="profile-body-left-menu">
+            <div class="profile-body-left-menu-item">Lương về sale to!</div>
+            <div class="profile-body-left-menu-item" onclick="toggleMenu()">
+                <div class="profile-icon">
+                    <img src="https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4" alt=""/>
+                </div>
+                <span style="font-size: 1.5rem;"> Tài khoản của tôi </span>
+            </div>
+            <div class="profile-body-left-menu-item-option" id="profile-options">
+                <span id="profile-menu-element-info" class="profile-body-left-menu-item-option-item"
+                      onclick="showProfile()">Hồ sơ</span>
+                <div class="profile-body-left-menu-item-option-item" onclick="showWallet()">Ví</div>
+                <span id="profile-menu-element-address" class="profile-body-left-menu-item-option-item"
+                      onclick="showAddress()">Địa chỉ</span>
+                <div class="profile-body-left-menu-item-option-item">Đổi mật khẩu</div>
+            </div>
+            <div class="profile-body-left-menu-item">
+                <div class="profile-icon">
+                    <img src="https://down-vn.img.susercontent.com/file/f0049e9df4e536bc3e7f140d071e9078" alt=""/>
+                </div>
+                <span style="font-size: 1.5rem;"> Đơn mua </span>
+            </div>
+
+            <div class="profile-body-left-menu-item">
+                <div class="profile-icon">
+                    <img src="https://down-vn.img.susercontent.com/file/e10a43b53ec8605f4829da5618e0717c" alt=""/>
+                </div>
+                <span style="font-size: 1.5rem;"> Thông báo </span>
+            </div>
+            <div class="profile-body-left-menu-item">
+                <div class="profile-icon">
+                    <img src="https://down-vn.img.susercontent.com/file/84feaa363ce325071c0a66d3c9a88748" alt=""/>
+                </div>
+                <span style="font-size: 1.5rem;"> Kho voucher </span>
+            </div>
+            <div class="profile-body-left-menu-item">
+                <div class="profile-icon">
+                    <img src="https://down-vn.img.susercontent.com/file/a0ef4bd8e16e481b4253bd0eb563f784" alt=""/>
+                </div>
+                <span style="font-size: 1.5rem;"> Shopee xu </span>
+            </div>
+        </div>
+    </div>
+    <div class="profile-body-right">
+        <div class="profile-body-right-transfer">
+            <div id="profile-my-profile-content" style="display: block;">
+                <div class="profile-body-right-my-profile">
+                    <div class="profile-body-right-my-profile-title">Hồ sơ của tôi</div>
+                    <span style="font-size: 1.5rem">Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
+                </div>
+                <form action="#" id="profile-edit-form" method="post">
+                    <input type="hidden" name="id" value="id">
+                    <div class="profile-edit-form-content">
+                        <div class="profile-edit-form-content-left">
+                            <div class="profile-edit-form-content-left-field">
+                                <div class="profile-edit-form-content-title">Tên đăng nhập</div>
+                                <div class="profile-edit-form-content-input">Đình Hiếu</div>
+                            </div>
+                            <div class="profile-edit-form-content-left-field">
+                                <label for="profile-edit-field-email"
+                                       class="profile-edit-form-content-title">Email</label>
+                                <div class="profile-edit-form-content-input">
+                                    <input type="hidden" name="email" value="hieun4587@gmail.com">
+                                    <input id="profile-edit-field-email" value="hieun4587@gmail.com" type="text"
+                                           spellcheck="false" disabled>
+                                    <span id="profile-edit-field-email-action"
+                                          class="profile-edit-field-action" onclick="enableEmailEdit()">Change</span>
+                                </div>
+                            </div>
+                            <div class="profile-edit-form-content-left-field">
+                                <label for="profile-edit-field-email" class="profile-edit-form-content-title">Số điện
+                                    thoại</label>
+                                <div class="profile-edit-form-content-input">
+                                    <input type="hidden" name="phoneNumber" value="0865283701">
+                                    <input id="profile-edit-field-phoneNumber" value="0865283701" type="text"
+                                           placeholder="Not added yet" minlength="10" maxlength="10" spellcheck="false"
+                                           disabled>
+                                    <span id="profile-edit-field-phone-action"
+                                          class="profile-edit-field-action" onclick="enableEmailEdit()">Change</span>
+                                </div>
+                            </div>
+                            <div class="profile-edit-form-content-left-field">
+                                <div class="profile-edit-form-content-title">Giới tính</div>
+                                <div class="profile-edit-form-content-input">
+                                    <div class=profile-gender-input-radio>
+                                        <input type="radio" name="gender" id="profile-gender-male" value="male" checked>
+                                        <label for="profile-gender-male">Name</label>
+
+                                    </div>
+                                    <div class="profile-gender-input-radio">
+                                        <input type="radio" name="gender" id="profile-gender-female" value="female"
+                                               checked>
+                                        <label for="profile-gender-female">Nữ</label>
+                                    </div>
+                                    <div class="profile-gender-input-radio">
+                                        <input type="radio" name="gender" id="profile-gender-other" value="other"
+                                               checked>
+                                        <label for="profile-gender-other">Khác</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-edit-form-content-left-field">
+                                <div class="profile-edit-form-content-title">Ngày sinh</div>
+                                <div class="profile-edit-form-content-input">
+                                    <div class="profile-birthday-list-value-number-choice">
+                                        <select id="day" name="day"></select>
+                                        <select id="month" name="month"></select>
+                                        <select id="year" name="year"></select>
+                                        <span id="error-message" style="color: red;"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="profile-edit-form-content-left-field">
+                                <div class="profile-edit-form-content-title"></div>
+                                <div class="profile-edit-form-content-input">
+                                    <button class="profile-edit-save-btn" type="submit">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-edit-form-content-right">
+                            <div class="profile-edit-form-content-right-item">
+                                <div class="profile-edit-form-content-right-avatar">
+                                    <img src="/resources/image/User-Avatar-PNG-Transparent-Image.png"
+                                         alt="">
+                                </div>
+                                <label id="profile-edit-choose-avatar" for="profile-edit-avatar">Choose image</label>
+                                <input type="file" name="user_avatar" id="profile-edit-avatar" accept=".jpg,.jpeg,.png"
+                                       hidden/>
+                                <div class="profile-edit-limit-require">
+                                    <span>Dụng lượng file tối đa 1 MB</span>
+                                    <span>Định dạng:.JPEG, .PNG</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div id="profile-address-content" style="display: none;">
+                <div id="profile-address-wrap">
+                    <div id="profile-address-header">
+                        <span id="profile-address-header-title">Địa chỉ của tôi</span>
+                        <div id="profile-address-add-new-wrp" onclick="openAddAddressDialog()">
+                            <span>Thêm địa chỉ mới </span>
+                        </div>
+                    </div>
+                    <div id="profile-address-body">
+                        <div id="profile-address-title">Địa chỉ</div>
+                        <div id="profile-address-list-address">
+                            <div class="profile__address--card-wrp" id="profile-address-card">
+                                <div class="profile__address--card-head profile__address--card-part">
+                                    <div class="profile__address--card-name-phone-wrp">
+                                        <div class="profile__address--card-user-name">
+                                            <div class="profile__address--card-name-phone-wrp">
+                                                <div class="profile__address--card-user-name">Nguyễn Lê Đình Hiếu</div>
+                                                <div class="profile__address--card-user-phone"><span>(+84)</span>
+                                                    865283701
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile__address--card-action-wrp">
+                                        <span class="profile__address--card-updt" onclick="openAddAddressDialog()">Update</span>
+                                        <span class="profile__address--card-del" onclick="openRemoveAddressDialog()">Delete</span>
+                                    </div>
+                                </div>
+                                <div class="profile__address--card-body profile__address--card-part">
+
+                                    <div class="profile__address--card-address-detail">
+                                        <div class="profile__address--card-detail">Địa chỉ</div>
+                                        <div class="profile__address--card-address-name">Chợ Đêm Thiên Bình, Đường Hàm
+                                            Nghi, Khu Phố Thiên Bình
+                                            Phường Tam Phước, Thành Phố Biên Hòa, Đồng Nai
+                                        </div>
+                                    </div>
+                                    <button class="profile__address--card-set-default" type="button">Set as default
+                                    </button>
+                                </div>
+                                <div class="profile__address--card-foot profile__address--card-part">
+                                    <span class="profile__address--card-status">Default</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <dialog id="profile-dialog-update-address" class="profile-dialog-add-address">
+                    <form action="#" id="profile-address-form-update-new" method="POST"
+                          class="profile-address-form-add-new">
+                        <div class="profile-address-form-head">Địa chỉ mới</div>
+                        <div class="profile-address-form-body">
+                            <div class="profile-address-form-field-inp">
+                                <div class="profile-address-form-name-phone-wrp">
+                                    <input name="name" type="text" id="profile-address-inp-name-add"
+                                           class="profile-address-inp-name" placeholder="Họ và tên">
+                                    <input name="phone" type="text" id="profile-address-inp-phone-add"
+                                           class="profile-address-inp-phone" placeholder="Số điện thoại">
+                                </div>
+                                <div class="profile-address-form-address-wrp">
+                                    <input name="address" type="text" id="profile-address-inp-address-update"
+                                           class="profile-address-inp-address"
+                                           placeholder="Địa chỉ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-address-form-foot">
+                            <button id="profile-address-form-back-btn-update" class="profile-address-form-back-btn" type="button"
+                                    onclick="closeAddAddressDialog()">Trở lại
+                            </button>
+                            <button id="profile-address-form-complete-btn-update" class="profile-address-form-complete-btn" type="submit">Hoàn thành</button>
+                        </div>
+                    </form>
+                </dialog>
+                <dialog id="profile-dialog-add-address" class="profile-dialog-add-address">
+                    <form action="#" id="profile-address-form-add-new" method="POST"
+                          class="profile-address-form-add-new">
+                        <div class="profile-address-form-head">Địa chỉ mới</div>
+                        <div class="profile-address-form-body">
+                            <div class="profile-address-form-field-inp">
+                                <div class="profile-address-form-name-phone-wrp">
+                                    <input name="name" type="text" id="profile-address-inp-name-update"
+                                           class="profile-address-inp-name" placeholder="Họ và tên">
+                                    <input name="phone" type="text" id="profile-address-inp-phone-update"
+                                           class="profile-address-inp-phone" placeholder="Số điện thoại">
+                                </div>
+                                <div class="profile-address-form-address-wrp">
+                                    <input name="address" type="text" id="profile-address-inp-address-add"
+                                           class="profile-address-inp-address"
+                                           placeholder="Địa chỉ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-address-form-foot">
+                            <button id="profile-address-form-back-btn-add" class="profile-address-form-back-btn" type="button"
+                                    onclick="closeAddAddressDialog()">Trở lại
+                            </button>
+                            <button id="profile-address-form-complete-btn-add" class="profile-address-form-complete-btn" type="submit">Hoàn thành</button>
+                        </div>
+                    </form>
+                </dialog>
+            </div>
+            <div id="profile-my-wallet-content" style="display: none;">
+                <div class="profile-body-right-my-wallet">
+                    <div class="profile-body-right-my-profile-title">Ví điện tử của tôi</div>
+                </div>
+                <div class="profile-wallet-form-content">
+                    <p style="font-size: 2rem;margin-top: 20px" >Số dư khả dụng: 2000đ</p>
+                </div>
+
+            </div>
+        </div>
+        <dialog id="profile-dialog-remove-address" class="profile-dialog-remove-address">
+            <form action="#" id="profile-address-form-remove" method="POST" class="profile-address-form-remove" onsubmit="confirmDelete(event)">
+                <div class="profile-address-form-head">Xác nhận xóa</div>
+                <div class="profile-address-form-body">
+                    <p style="font-size: 1.2rem">Bạn có chắc chắn muốn xóa không?</p>
+                </div>
+                <div class="cprofile-address-form-foot">
+                    <button id="profile-address-form-back-btn-remove"  class="profile-address-form-back-btn" type="button" onclick="closeDeleteDialog()">Hủy bỏ</button>
+                    <button id="profile-address-form-complete-btn-remove" class="profile-address-form-complete-btn" type="submit">Xóa</button>
+                </div>
+            </form>
+        </dialog>
+    </div>
+</div>
+</div>
+<footer th:replace="footer_main::footer"></footer>
+<script>
+    function toggleMenu() {
+        let options = document.getElementById("profile-options");
+        if (options.style.display === "none") {
+            options.style.display = "flex";
+        } else {
+            options.style.display = "none";
+        }
+    }
+
+    let isEditable = false;
+
+    function enableEmailEdit() {
+        let emailField = document.getElementById('profile-edit-field-email');
+        isEditable = !isEditable;
+        emailField.disabled = !isEditable;
+    }
+
+    for (let i = 1; i <= 31; i++) {
+        document.getElementById("day").innerHTML += "<option value='" + i + "'>" + i + "</option>";
+    }
+
+    let months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+    for (let i = 0; i < months.length; i++) {
+        document.getElementById("month").innerHTML += "<option value='" + (i + 1) + "'>" + months[i] + "</option>";
+    }
+
+    let currentYear = new Date().getFullYear();
+    for (let i = currentYear; i >= currentYear - 100; i--) {
+        document.getElementById("year").innerHTML += "<option value='" + i + "'>" + "Năm " + i + "</option>";
+    }
+
+    function checkDate() {
+        let selectedDay = document.getElementById("day").value;
+        let selectedMonth = document.getElementById("month").value;
+        let selectedYear = document.getElementById("year").value;
+        let selectedDate = new Date(selectedYear, selectedMonth - 1, selectedDay);
+        let currentDate = new Date();
+        if (selectedDate > currentDate) {
+            document.getElementById("error-message").innerHTML = "Ngày sinh không hợp lệ";
+        } else {
+            document.getElementById("error-message").innerHTML = "";
+        }
+    }
+
+    function showProfile() {
+        document.getElementById('profile-my-profile-content').style.display = 'block';
+        document.getElementById('profile-address-content').style.display = 'none';
+        document.getElementById('profile-my-wallet-content').style.display = 'none';
+
+    }
+
+    function showAddress() {
+        document.getElementById('profile-my-profile-content').style.display = 'none';
+        document.getElementById('profile-address-content').style.display = 'block';
+        document.getElementById('profile-my-wallet-content').style.display = 'none';
+
+    }
+    function showWallet(){
+        document.getElementById('profile-my-wallet-content').style.display = 'block';
+        document.getElementById('profile-my-profile-content').style.display = 'none';
+        document.getElementById('profile-address-content').style.display = 'none';
+
+    }
+
+    function enableEdit() {
+        document.getElementById('profile-edit-field-fullName').disabled = false;
+        document.getElementById('profile-edit-field-phone').disabled = false;
+        document.getElementById('profile-edit-field-address').disabled = false;
+    }
+
+    let overlay = document.getElementById('overlay');
+    let dialog = document.getElementById('profile-dialog-add-address');
+    let dialog1 = document.getElementById('profile-dialog-update-address');
+    let dialogRemove = document.getElementById('profile-dialog-remove-address');
+
+    overlay.onclick = function () {
+        closeAddAddressDialog();
+    };
+
+    function openAddAddressDialog() {
+        overlay.classList.add('active');
+        dialog.classList.add('active');
+        dialog1.classList.add('active');
+    }
+
+    function closeAddAddressDialog() {
+        overlay.classList.remove('active');
+        dialog.classList.remove('active');
+        dialog1.classList.remove('active');
+    }
+    overlay.onclick = function () {
+        closeDeleteDialog();
+    };
+    function openRemoveAddressDialog(){
+        overlay.classList.add('active');
+        dialogRemove.classList.add('active');
+    }
+    function closeDeleteDialog(){
+        overlay.classList.remove('active');
+        dialogRemove.classList.remove('active');
+    }
+
+</script>
+</body>
+</html>
