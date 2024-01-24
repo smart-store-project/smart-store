@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IBrandService {
     List<Brand> findAll();
-
+    Brand findByName(String name);
     Brand findById(Long id);
 
     List<Product> sortProductByName(Long id);

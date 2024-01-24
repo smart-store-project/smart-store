@@ -149,9 +149,9 @@
 
                     </div>
                     <!-- Guestmode Log -->
-<!--                    <li><a href="#" class="text-white flex items-center border-r border-white-22 px-4"-->
-<!--                           style="font-size: 14px">Đăng ký</a></li>-->
-<!--                    <li><a href="#" class="text-white flex items-cen    ter px-4" style="font-size: 14px">Đăng nhập</a></li>-->
+                    <!--                    <li><a href="#" class="text-white flex items-center border-r border-white-22 px-4"-->
+                    <!--                           style="font-size: 14px">Đăng ký</a></li>-->
+                    <!--                    <li><a href="#" class="text-white flex items-cen    ter px-4" style="font-size: 14px">Đăng nhập</a></li>-->
                     <!-- Usermode Log -->
 
                 </ul>
@@ -174,43 +174,31 @@
 
 
                 <div class="navsearch__with-search">
-                    <div class="navsearch__searchbar">
-                        <form action="" class="navsearch__searchbar--main">
-                            <input type="text" class="navsearch__searchbar--input" placeholder="Siêu sale thương hiệu">
-                            <div class="navsearch__history">
-                                <div class="navsearch__history--content">
-                                    <a href="https://shopee.vn/m/1010" class="navsearch__history--prefill">
-                                        Siêu sale thương hiệu
-                                        <img src="../resources/image/supersale.png" alt="">
-                                    </a>
-                                    <a href="https://shopee.vn/search?keyword=tai%20nghe"
-                                       class="navsearch__history--text">tai nghe</a>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="wtosearch navbar--button">
-                            <div class="wtosearch__option">
-                                <p class="wtosearch__option--label">Trong Shop này</p>
-                                <i class="fas fa-angle-down wtosearch__option--icon"></i>
-                            </div>
-
-                            <ul class="wtosearch--list navbar__subnav">
-                                <li class="wtosearch--item">Trong Shop này <i
-                                        class="fas fa-check wtosearch--selected"></i></li>
-                                <li class="wtosearch--item">Trong Shopee</li>
-                            </ul>
+                    <form th:action="@{/products/search}" class="navsearch__searchbar--main" method="get">
+                        <div class="navsearch__searchbar">
+                            <input type="text" class="navsearch__searchbar--input" name="search" id="search"
+                                   th:value="${search}" placeholder="Siêu sale thương hiệu">
+                            <input type="hidden" name="page" th:value="${page}">
+                            <select name="typeSearch" class="navsearch__searchbar--select" id="typeSearch">
+                                <option value="productName">Theo Tên Sản Phẩm <i
+                                        class="fas fa-check wtosearch--selected"></i></option>
+                                <option value="brandName">Theo Tên Thương Hiệu <i
+                                        class="fas fa-check wtosearch--selected"></i></option>
+                                <option value="categoryName">Theo Danh Mục <i
+                                        class="fas fa-check wtosearch--selected"></i></option>
+                            </select>
+                            <button type="submit" class="navsearch__searchbar--searchbtn" style=" position: absolute;right: -0.5rem;"><i class="fas fa-search" aria-hidden="true"></i></button>
                         </div>
-                        <button class="navsearch__searchbar--searchbtn"><i class="fas fa-search"></i></button>
-                    </div>
-                    <div class="navsearch__recommend hide-on-tablet hide-on-mobile">
-                        <a href="" class="navsearch__recommend--button">Áo khoác</a>
-                        <a href="" class="navsearch__recommend--button">Váy</a>
-                        <a href="" class="navsearch__recommend--button">Quần</a>
-                        <a href="" class="navsearch__recommend--button">Tai nghe</a>
-                        <a href="" class="navsearch__recommend--button">Túi xách nữ</a>
-                        <a href="" class="navsearch__recommend--button">Chân váy</a>
-                        <a href="" class="navsearch__recommend--button">Dép</a>
-                        <a href="" class="navsearch__recommend--button">Bông tẩy trang </a>
+                    </form>
+                    <div class="navsearch__history">
+                        <div class="navsearch__history--content">
+                            <a href="https://shopee.vn/m/1010" class="navsearch__history--prefill">
+                                Siêu sale thương hiệu
+                                <img src="/resources/image/supersale.png" alt="">
+                            </a>
+                            <a href="https://shopee.vn/search?keyword=tai%20nghe" class="navsearch__history--text">tai
+                                nghe</a>
+                        </div>
                     </div>
                 </div>
                 <div class="navsearch__cart">
@@ -269,5 +257,25 @@
         </div>
     </div>
 </header>
+<!--<div class="product-list__items">-->
+<!--    <div class="product-item" th:each="product : ${products}">-->
+<!--        <div class="product-item__details">-->
+<!--            <a th:href="@{/products/{id}/view(id=${product.id})}">-->
+
+<!--                <div class="product-item__image">-->
+<!--                    <img th:if="${product != null}" th:src="${product.imgURL}"-->
+<!--                         alt="Product Image">-->
+<!--                </div>-->
+<!--                <div class="product-item__name" th:text="${product != null ? product.name : ''}"></div>-->
+<!--            </a>-->
+
+<!--            <div class="product-item__price">-->
+<!--                <sub>đ</sub>-->
+<!--                <div th:text="${product != null ? product.price : ''}"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
 </body>
 </html>

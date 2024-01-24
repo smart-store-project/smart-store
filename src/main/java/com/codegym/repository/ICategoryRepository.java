@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ICategoryRepository extends PagingAndSortingRepository<Category, Long> {
     List<Category> findAllByBrand(Brand brand);
-
+    Category findByName(String name);
 }

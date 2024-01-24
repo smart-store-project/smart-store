@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Shop</title>
+</head>
+<body>
+<header th:replace="header_main::header"></header>
+<div class="container_shop">
+    <div class="container_shop-grid justify-stretch gap-20">
+
+        <div class="container_shop-column w-fit">
+            <nav class="container_shop-category">
+                <h3 class="container_shop-category_heading">
+                    <i class="category-heading-icon fa-solid fa-filter"></i>
+                    Bộ lọc tìm kiếm
+                </h3>
+                <div class="container_shop-category_group">
+                    <div class="container_shop-category_group_title">Theo Danh Mục</div>
+                    <ul class="container_shop-category_group_list">
+                        <li class="container_shop-category_group_item" th:each="category : ${categories}">
+                            <input type="checkbox" class="container_shop-category_group-item-check product-category-checkbox" th:data-category-id="${category.id}">
+                            <div th:text="${category != null ? category.name : ''}"></div>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="container_shop-category_group">
+                    <div class="container_shop-category_group_title">Nơi bán</div>
+                    <ul class="container_shop-category_group_list">
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            TP. Hồ Chí Minh
+                        </li>
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Hà Nội
+                        </li>
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Thái Nguyên
+                        </li>
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Vĩnh Phúc
+                        </li>
+                    </ul>
+                </div>
+                <div class="container_shop-category_group">
+                    <div class="container_shop-category_group_title">Đơn vị vận chuyển</div>
+                    <ul class="container_shop-category_group_list">
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Hỏa tốc
+                        </li>
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Nhanh
+                        </li>
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Tiết kiệm
+                        </li>
+                    </ul>
+                </div>
+                <div class="container_shop-category_group">
+                    <div class="container_shop-category_group_title">Khoảng giá</div>
+                    <div class="container_shop-category_group_filter">
+                        <input type="number" placeholder="₫ TỪ" class="container_shop-category_group_filter-input">
+                        <i class="fas fa-arrow-right"></i>
+                        <input type="number" placeholder="₫ Đến" class="container_shop-category_group_filter-input">
+                    </div>
+                    <button class="btn-shop btn--primary category-group-filter-btn">Áp dụng</button>
+                </div>
+                <div class="container_shop-category_group">
+                    <div class="container_shop-category_group_title">Tình trạng</div>
+                    <ul class="container_shop-category_group_list">
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Đã sử dụng
+                        </li>
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Hà Nội
+                        </li>
+                    </ul>
+                </div>
+                <div class="container_shop-category_group">
+                    <div class="container_shop-category_group_title">Đánh giá</div>
+                    <div class="container_shop-category_group-rating">
+                        <input type="checkbox" class="category-group-item-check">
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                    </div>
+                    <div class="container_shop-category_group-rating">
+                        <input type="checkbox" class="category-group-item-check">
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                    </div>
+                    <div class="container_shop-category_group-rating">
+                        <input type="checkbox" class="category-group-item-check">
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                    </div>
+                    <div class="container_shop-category_group-rating">
+                        <input type="checkbox" class="category-group-item-check">
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                    </div>
+                    <div class="container_shop-category_group-rating">
+                        <input type="checkbox" class="category-group-item-check">
+                        <i class="star-checked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                        <i class="star-unchecked far fa-star"></i>
+                    </div>
+                </div>
+                <div class="container_shop-category_group">
+                    <div class="container_shop-category_group_title">Dịch vụ & khuyến mãi</div>
+                    <ul class="container_shop-category_group_list">
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Voucher Xtra
+                        </li>
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Đang giảm giá
+                        </li>
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Gì cũng rẻ
+                        </li>
+                        <li class="container_shop-category_group_item">
+                            <input type="checkbox" class="container_shop-category_group-item-check">
+                            Hàng có sẵn
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn-shop btn--primary category-group-filter-btn">Làm mới</button>
+            </nav>
+        </div>
+        <div class="container_shop-column grow">
+            <p style="background-color: #eee;font-size: 40px;margin-bottom: 50px;color: #FF0000;font-weight: bold;text-shadow: 2px 2px #000000;text-align: center;">
+                Brand Name
+            </p>
+
+            <div class="container_shop-home-filter">
+
+                <div class="container_shop-home-filter-control">
+                    <p class="container_shop-home-filter-title">Sắp xếp theo</p>
+                    <button class="btn-shop btn--primary home-filter-btn">
+                        Phổ biến</button>
+                    <button class="btn-shop home-filter-btn">Mới nhất</button>
+                    <button class="btn-shop home-filter-btn">Bán chạy</button>
+                    <div class="btn-shop container_shop-home-filter-sort">
+                        <p class="home-filter-sort-btn">Sắp xếp</p>
+                        <i class="fas fa-sort-amount-down-alt" style="font-size: 1.5rem"></i>
+
+                        <ul class="container_shop-home-filter-sort-list">
+                            <li>
+                                <a th:href="@{/brands/view/sort?sortType=priceAsc&brandId=__${brand.id}__}" class="container_shop-home-filter-sort-item-link">
+                                    Giá: thấp đến cao
+                                    <i class="fas fa-sort-amount-down-alt"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/brands/view/sort?sortType=priceDesc&brandId=__${brand.id}__}" class="container_shop-home-filter-sort-item-link">
+                                    Giá: cao đến thấp
+                                    <i class="fas fa-sort-amount-up-alt"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/brands/view/sort?sortType=name&brandId=__${brand.id}__}" class="container_shop-home-filter-sort-item-link">
+                                  Tên : A-Z
+                                    <i class="fas fa-sort-amount-down-alt"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container_shop-home-filter-page">
+                    <div class="container_shop-home-filter-page-number">
+                        <p class="container_shop-home-filter-now">1</p>
+                        /14
+                    </div>
+                </div>
+            </div>
+            <div class="container_shop-home-product">
+                <div class=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
+                    <div class="product-item__box w-full" th:each="product : ${products}" id="product-list__items">
+                        <div class="product__img">
+                            <img th:if="${product != null}" th:src="${product.imgURL}" style="font-size: 50px"/>
+                            <img src="/resources/image/overlay.png" alt="">
+                            <div class="product__img-favourite-label">
+                                <p>Yêu thích</p>
+                            </div>
+                            <div class="product__img-discount">
+                                <p class="product__img-discount-percent">55%</p>
+                                <p class="product__img-discount-reduce">GIẢM</p>
+                            </div>
+                        </div>
+                        <div class="product__info">
+                            <p class="product__info--name" th:text="${product != null ? product.name : ''}"></p>
+                            <span class="product__info--price" th:text="${product != null ? product.price : ''}"></span>
+                            <div class="product__quality">
+                                <i class="far fa-heart product__quality--like"></i>
+                                <div class="product__quality--fivestar">
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                    <i class="fas fa-star product__quality--fivestar-icon"></i>
+                                </div>
+                                <span class="product__quality--sold">Đã bán 640</span>
+                            </div>
+                            <span class="product__info--place">Hà Nội</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    let brandId = /*[(${brandId})]*/ null;
+    let selectedCategories = [];
+</script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        $('.container_shop-category_group-item-check').on('change', function (e) {
+            e.preventDefault();
+
+            let categoryId = $(this).data('category-id');
+
+            // Kiểm tra xem checkbox có được chọn hay không
+            if ($(this).is(':checked')) {
+                // Thêm danh mục vào mảng
+                selectedCategories.push(categoryId);
+            } else {
+                // Loại bỏ danh mục khỏi mảng
+                selectedCategories = selectedCategories.filter(id => id !== categoryId);
+            }
+
+            // Xóa nội dung hiện tại
+            $('.container_shop-home-product').html('');
+
+            // Tải sản phẩm từ tất cả các danh mục đã chọn
+            selectedCategories.forEach(categoryId => {
+                $.ajax({
+                    url: '/brands/' + brandId + '/view/category/' + categoryId,
+                    type: 'GET',
+                    data: {brandId: brandId},
+                    success: function (data) {
+                        let content = $(data).find('.container_shop-home-product').html();
+                        $('.container_shop-home-product').append(content);
+                    },
+                    error: function () {
+                        console.log('Failed to load products.');
+                    }
+                });
+            });
+
+            // Nếu không có danh mục nào được chọn, trả về danh sách ban đầu
+            if (selectedCategories.length === 0) {
+                location.reload();
+            }
+        });
+    });
+</script>
+<footer th:replace="footer_main::footer"></footer>
+</body>
+</html>

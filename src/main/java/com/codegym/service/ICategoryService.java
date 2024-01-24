@@ -10,6 +10,7 @@ public interface ICategoryService {
     Iterable<Category> findAllByBrand(Brand brand);
 
     Category findById(Long id);
+    Category findByName(String name);
 
     Iterable<Category> findAll();
 }
