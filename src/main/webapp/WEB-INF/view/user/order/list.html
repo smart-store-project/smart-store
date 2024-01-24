@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Title</title>
+
+</head>
+<body>
+<h1>Order</h1>
+
+<div th:each="orderStatus : ${orderStatuses}">
+    <a th:href="@{/user/orders(type=${orderStatus.id})}">
+        <span th:text="${orderStatus.name}"></span>
+    </a>
+</div>
+<div th:if="${orders == null}">
+    <p>Empty</p>
+</div>
+<div th:else="${orders == null}">
+    <div th:each="order : ${orders}">
+        <div th:each="orderDetail, orderStat : ${order.orderDetails}">
+            <a th:href="@{/products/view/{id}(id=${orderDetail.product.id})}">
+                <span th:text="img"></span>
+                <span th:text="${orderDetail.product.name}"></span>
+                <span th:text="${orderDetail.quantity}"></span>
+                <span th:text="${orderDetail.getTotalPrice()}"></span>
+                <span th:text="${order.orderStatus.name}" th:if="${orderStat.count == 1}"></span>
+            </a>
+            <br>
+            <a th:href="@{/user/orders/buyAgain/{id}(id=${order.id})}">Buy Again</a> ||
+            <a th:href="@{/user/reviews/create/{id}(id=${orderDetail.product.id})}">Rate</a>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

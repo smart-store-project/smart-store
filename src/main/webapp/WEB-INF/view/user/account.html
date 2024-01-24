@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Title</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        #content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<!--Sidebar-->
+<img src="https://toppng.com/uploads/preview/app-icon-set-login-icon-comments-avatar-icon-11553436380yill0nchdm.png"
+     style="width: 20px; height: 20px" alt="">
+<span th:text="${user.username}"></span>
+<br>
+<h4>My Account</h4>
+<a th:href="@{/user/account/{type}(type=profile)}">Profile</a><br>
+<a th:href="@{/user/account/{type}(type=wallet)}">Wallet</a><br>
+<a th:href="@{/user/account/{type}(type=address)}">Address</a><br>
+<a th:href="@{/user/account/{type}(type=changePass)}">Change Password</a><br>
+<a th:href="@{/user/account/{type}(type=notificationSetting)}">Notification Setting</a><br>
+<a th:href="@{/user/orders}"><h4>My Purchase</h4></a><br>
+<a th:href="@{/user/notifications}"><h4>Notifications</h4></a><br>
+<a th:href="@{/user/vouchers}"><h4>My Vouchers</h4></a><br>
+<a th:href="@{/user/shopeeCoins}"><h4>My Shopee Coins</h4></a><br>
+<span id="notification"></span>
+<!--Content-->
+<div th:if="${type.equals('profile')}" id="profile">
+    <div class="content">
+        <h3>My profile</h3>
+        <p>Manage and protect your account</p>
+        <table th:object="${user}">
+            <tr>
+                <th>Username</th>
+                <td th:text="*{username}"></td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>
+                    <label>
+                        <input type="text" id="name" name="name">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>
+                    <div th:if="*{email}">
+                        <p id="userEmail" th:text="*{email}"></p>
+                    </div>
+                    <div th:else>
+                        <a onclick="addEmail()">Add</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Phone Number</th>
+                <td>
+                    <p id="userPhoneNumber" th:text="*{phoneNumber}"></p>
+                    <a onclick="changePhoneNumber()">Change</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>
+                    <label>
+                        <input type="radio" name="gender" value="Male" id="maleRadio">Male
+                        <input type="radio" name="gender" value="Female" id="femaleRadio">Female
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>Date of birth</th>
+                <td>
+                    <label>
+                        <select name="day" id="dayDropdown">
+                            <option th:each="day : ${#numbers.sequence(1, 31)}" th:value="${day}"
+                                    th:text="${day}"></option>
+                        </select>
+                    </label>
+                    <label>
+                        <select name="month" id="monthDropdown">
+                            <option th:each="month : ${#numbers.sequence(1, 12)}" th:value="${month}"
+                                    th:text="${month}"></option>
+                        </select>
+                    </label>
+                    <label>
+                        <select name="year" id="yearDropdown">
+                            <option th:each="year : ${#numbers.sequence(1910, 2024)}" th:value="${year}"
+                                    th:text="${year}"></option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="save()">Save</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--Upload image-->
+    <!--Need confirm steps to add email or phone number-->
+    <div id="change-phone-form"></div>
+</div>
+<div th:if="${type.equals('wallet')}">
+    <div class="content">
+        <h3>My Wallet</h3>
+        <span>Balance: </span>
+        <span th:text="${user.wallet.balance}"></span>
+    </div>
+</div>
+<div th:if="${type.equals('address')}">
+    <div class="content">
+        <h3>My Addresses</h3>
+        <span>Address: </span>
+        <span th:text="${user.address}"></span>
+        <button onclick="showChangePopup()">Edit</button>
+    </div>
+</div>
+<div id="change-address-popup" style="display: none">
+    <h3>Edit Address</h3>
+    <label>
+        <input type="text" id="new-address" th:value="${user.address}">
+    </label>
+    <button onclick="changeAddress()">Submit</button>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous">
+</script>
+<script>
+
+    function changeAddress() {
+        let newAddress= document.getElementById("new-address").value;
+        $.ajax({
+            type: 'PUT',
+            url: 'http://localhost:8080/api/users/address',
+            data: JSON.stringify(newAddress),
+            success: function () {
+                window.location.href = '/user/account/address';
+            },
+            error: function () {
+                console.log("can not update address")
+            }
+        })
+    }
+    function showChangePopup() {
+        document.getElementById("change-address-popup").style.display = "block";
+    }
+
+    function addEmail() {
+        let emailForm = `<h3>Add Email Address</h3><form><p>New Email Address</p><input type='email' id='email' placeholder='Enter your email address'><button onclick='saveEmail()'>Save</button></form>`;
+        document.getElementById("content").innerHTML = emailForm;
+    }
+
+    function saveEmail() {
+        let email = document.getElementById("email").value;
+        // localStorage.setItem("email", email);
+        sendUserData("email", email);
+    }
+
+    function savePhoneNumber() {
+        let phoneNumber = document.getElementById("phoneNumber").value;
+        // localStorage.setItem("phoneNumber", phoneNumber);
+        sendUserData("phoneNumber", phoneNumber);
+    }
+
+    function save() {
+        let name = document.getElementById("name").value;
+        let radioButton = document.querySelector('input[name="gender"]:checked');
+        let gender = radioButton ? radioButton.value : "";
+        let day = document.getElementById("dayDropdown").value;
+        let month = document.getElementById("monthDropdown").value;
+        let year = document.getElementById("yearDropdown").value;
+
+        localStorage.setItem("name", name);
+        localStorage.setItem("gender", gender);
+        localStorage.setItem("day", day);
+        localStorage.setItem("month", month);
+        localStorage.setItem("year", year);
+        showNotification();
+    }
+
+    function showNotification() {
+        document.getElementById("notification").innerText = "update user profile successfully";
+        setTimeout(function () {
+            document.getElementById("notification").innerText = "";
+        }, 1000);
+    }
+
+    function sendUserData(type, data) {
+        console.log("url: " + 'http://localhost:8080/api/users/' + type);
+        $.ajax({
+            type: 'PUT',
+            url: 'http://localhost:8080/api/users/' + type,
+
+            data: JSON.stringify(data),
+            success: function () {
+                console.log("send data success")
+            },
+            error: function () {
+                console.log("send data fail")
+            }
+        })
+    }
+
+    function changePhoneNumber() {
+        let phoneForm = `<h3>Change Phone Number</h3><form><p>New Phone Number</p><input type='text' id='phoneNumber' placeholder='Enter your phone number'><button onclick='savePhoneNumber()'>Save</button></form>`;
+        document.getElementById("content").innerHTML = phoneForm;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let storedName = localStorage.getItem("name");
+        let storedGender = localStorage.getItem("gender");
+        let storedDay = localStorage.getItem("day");
+        let storedMonth = localStorage.getItem("month");
+        let storedYear = localStorage.getItem("year");
+
+        document.getElementById("name").value = storedName || "";
+        document.getElementById("dayDropdown").value = storedDay || "";
+        document.getElementById("monthDropdown").value = storedMonth || "";
+        document.getElementById("yearDropdown").value = storedYear || "";
+
+        if (storedGender === "Male") {
+            document.getElementById("maleRadio").checked = true;
+        } else if (storedGender === "Female") {
+            document.getElementById("femaleRadio").checked = true;
+        }
+    })
+
+
+</script>
+</body>
+</html>

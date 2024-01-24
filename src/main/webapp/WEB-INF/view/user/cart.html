@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Title</title>
+</head>
+<body>
+<h1>Cart</h1>
+<span id="cart-empty"></span>
+<table>
+    <tr>
+        <th>Checkbox</th>
+        <th>Id</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Unit price</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="cartItem : ${cart.getCart()}">
+        <td>
+            <label>
+                <input type="checkbox" onclick="chooseItem(event)" data-th-id="${cartItem.product.id}">
+            </label>
+        </td>
+        <td th:text="${cartItem.product.id}"></td>
+        <td>Image</td>
+        <td th:text="${cartItem.product.name}"></td>
+        <td th:text="${cartItem.product.price}"></td>
+        <td>
+            <button onclick="desItem(event)"> -</button>
+            <label>
+                <input type="number" th:value="${cartItem.quantity}" onchange="changeQuantity(event)"
+                       oninput="validateQuantity(event)">
+            </label>
+            <button onclick="incItem(event)"> +</button>
+        </td>
+        <td th:text="${cartItem.getTotalPrice()}"></td>
+        <td>
+            <button onclick="deleteItem(event)" class="btn btn-danger">Xóa</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Total price:</td>
+        <td th:text="${cart.getTotalPrice()}"></td>
+    </tr>
+</table>
+
+<button onclick="checkout()">Check out</button>
+
+<script
+        src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous">
+</script>
+<script>
+    function desItem(event) {
+        let button = event.target;
+        let currentNode = button.closest('tr');
+        let currentQuantity = parseInt(currentNode.querySelector('td:nth-child(6) label input').value, 10);
+        updateQuantity(event, currentQuantity - 1);
+    }
+
+    function incItem(event) {
+        let button = event.target;
+        let currentNode = button.closest('tr');
+        let currentQuantity = parseInt(currentNode.querySelector('td:nth-child(6) label input').value, 10);
+        updateQuantity(event, currentQuantity + 1);
+    }
+
+    function deleteItem(event) {
+        updateQuantity(event, 0);
+    }
+
+    function changeQuantity(event) {
+        let button = event.target;
+        let currentNode = button.closest('tr');
+        let newQuantity = currentNode.querySelector('td:nth-child(6) label input').value
+        updateQuantity(event, newQuantity);
+    }
+
+    function validateQuantity(event) {
+        let button = event.target;
+        let currentNode = button.closest('tr');
+        let inputNode = currentNode.querySelector('td:nth-child(6) label input');
+        let inputValue = inputNode.value;
+        inputValue = inputValue.replace(/\D/g, '');
+        inputValue = inputValue.replace(/^0+/, '');
+        inputNode.value = inputValue;
+    }
+
+
+    function updateQuantity(event, quantity) {
+        let button = event.target;
+        let currentNode = button.closest('tr');
+
+        let id = currentNode.querySelector('td:nth-child(2)').textContent.trim();
+
+        if (quantity > 0) {
+            $.ajax({
+                type: "PUT",
+                url: `http://localhost:8080/api/cart/` + id + `?quantity=` + quantity,
+                success: function (data) {
+                    let row = currentNode.querySelector('td:nth-child(6) label input');
+                    row.value = data;
+                },
+                error: function (error) {
+                    console.error("Error updating quantity: " + error);
+                }
+            })
+        } else {
+            $.ajax({
+                type: "DELETE",
+                url: `http://localhost:8080/api/cart/` + id,
+                success: function (data) {
+                    console.log("delete success" + data);
+                    currentNode.remove();
+                },
+                error: function (error) {
+                    console.error("Error delete cart item: " + error);
+                }
+            })
+
+        }
+    }
+
+    let items = [];
+
+    function chooseItem(event) {
+        let checkbox = event.target;
+
+        if (checkbox.checked) {
+            let currentNode = checkbox.closest('tr');
+            let idElement = currentNode.querySelector('td:nth-child(2)');
+
+            if (idElement) {
+                let id = parseInt(idElement.textContent.trim(), 10);
+
+                if (!items.includes(id)) {
+                    items.push(id);
+                    console.log("Added to cart - Item ID: " + id);
+                } else {
+                    items = items.filter(item => item !== id);
+                    console.log("Removed from cart - Item ID: " + id);
+                }
+            }
+        }
+    }
+
+
+    function checkout() {
+        console.log("cart list: " + items);
+
+        if (isCartPayEmpty() && items.length === 0) {
+            document.getElementById("cart-empty").innerHTML = "No things to check out";
+        } else {
+            document.getElementById("cart-empty").innerHTML = "";
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json'
+                },
+                type: 'POST',
+                data: JSON.stringify({items: items}),
+                url: `http://localhost:8080/api/checkout`,
+                success: function () {
+                    window.location.href = '/user/checkout';
+                    console.log('send data success')
+                },
+                error: function () {
+                    console.log('send data fail')
+                }
+            })
+        }
+
+    }
+
+    function isCartPayEmpty() {
+        return $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/checkout/checkCartPay'
+        })
+            .then(function (data) {
+                return data === true;
+            })
+            .catch(function () {
+                console.log("can not check cart pay");
+                return false;
+            });
+    }
+
+
+</script>
+</body>
+</html>

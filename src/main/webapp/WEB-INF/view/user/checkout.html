@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Title</title>
+</head>
+<body>
+    <h1>Check out</h1>
+    <span th:if="${error}" th:text="${error}"></span>
+    <div>
+        <h3>User Information</h3>
+        <p>Name: <span th:text="${user.username}"></span></p>
+        <p>Phone number: <span th:text="${user.phoneNumber}"></span></p>
+        <p>Address: <span th:text="${user.address}"></span></p>
+    </div>
+    <br>
+    <h3>Cart Information</h3>
+    <table>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Unit Price</th>
+            <th>Amount</th>
+            <th>Item Subtotal</th>
+        </tr>
+        <tr th:each="item : ${cartPay.getCart()}">
+            <td th:text="imageURL"></td>
+            <td th:text="${item.product.name}"></td>
+            <td th:text="${item.product.price}"></td>
+            <td th:text="${item.quantity}"></td>
+            <td th:text="${item.getTotalPrice()}"></td>
+        </tr>
+    </table>
+    <br>
+    <h3>Payment Method</h3>
+    <form th:action="@{/user/checkout}" method="post" th:object="${selectedPayment}">
+        <table>
+            <tr th:each="paymentMethod : ${paymentMethods}">
+                <td>
+                    <label>
+                        <input type="radio" name="selectedPaymentId" th:field="*{id}" th:value="${paymentMethod.id}"/>
+                        <span th:text="${paymentMethod.name}"></span>
+                    </label>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Place order">
+    </form>
+<script type="text/javascript" th:inline="javascript">
+    function placeOrder() {
+        let order = getOrder();
+        if (order) {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json'
+                },
+                type: 'POST',
+                data: JSON.stringify(order),
+                url: 'http://localhost:8080/api/orders',
+                success: function () {
+                    console.log("send data success");
+                    document.location.href = '/user/orders';
+                },
+                error: function () {
+                    console.log("send data fail");
+                }
+            });
+        }
+    }
+</script>
+<script th:inline="javascript">
+    function choosePaymentMethod() {
+        let selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        if (selectedPaymentMethod) {
+            console.log("payment method: " + selectedPaymentMethod.value);
+            return selectedPaymentMethod.value;
+        } else {
+            console.log("No payment method selected");
+            return null;
+        }
+    }
+
+    function getOrder() {
+        let cartPay = /*[[${cartPay}]]*/ null;
+        let user = /*[[${user}]]*/ null;
+        if (cartPay) {
+            return {
+                totalPrice: cartPay.getTotalPrice(),
+                status: 'TRANSPORT',
+                user: user,
+                date: new Date(),
+                paymentMethod: choosePaymentMethod(),
+                orderDetails: getOrderDetails(cartPay)
+            };
+        } else {
+            console.log("Error: Cart data is missing or invalid.");
+            return null;
+        }
+    }
+
+    function getOrderDetails(cartPay) {
+        if (cartPay && cartPay.getCart() && cartPay.getCart().length > 0) {
+            let cart = cartPay.getCart();
+            let orderDetails = [];
+            for (let i = 0; i < cart.length; i++) {
+                let orderDetail = {
+                    quantity: cart[i].quantity,
+                    unitPrice: cart[i].product.price,
+                    product: cart[i].product,
+                    order: null
+                }
+                orderDetails.push(orderDetail);
+            }
+            return orderDetails;
+        } else {
+            console.log("Error: Cart data is missing or invalid.");
+            return [];
+        }
+    }
+</script>
+</body>
+</html>
