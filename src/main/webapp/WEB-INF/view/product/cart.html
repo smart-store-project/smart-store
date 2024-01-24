@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+<div class="cart-header">
+    <div class="cart-header-container">
+        <div class="cart-header-container-row">
+            <div class="cart-header-container-row-left">
+                <div class="cart-header-container-row-left-title">
+                    <a href="#" style="text-decoration: none">Kênh người bán</a>
+                </div>
+                <div class="line"></div>
+                <div class="cart-header-container-row-left-title-rel inline-block">
+                    <a href="https://banhang.shopee.vn/"
+                       class="navbar__left--link   text-white hover:opacity-70 pr-4 pl-4">
+                        Tải ứng dụng
+                    </a>
+                    <div class="subnav__download navbar__subnav hidden absolute top-12 left-2 p-2 w-72 bg-white box-border animate-fadeIn z-20">
+                        <a href="https://shopee.vn/web" target="_blank">
+                            <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/d91264e165ed6facc6178994d5afae79.png"
+                                 alt="download_qr_code" class="subnav__download--qrcode">
+                            <div class="flex flex-wrap sm:flex-no-wrap justify-between items-center p-4">
+                                <img src="/resources/image/ios.png" class="w-28 w-full sm:w-1/2 mb-4 pr-3" alt="">
+                                <img src="/resources/image/android.png" class="w-28 w-full sm:w-1/2 mb-4" alt="">
+                                <div class="w-full mb-4">
+                                    <img src="/resources/image/appgallery.png" class="w-28" alt="">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="line"></div>
+                <div class="cart-header-container-row-left-title">
+                    <a href="#" style="text-decoration: none">Kết nối</a>
+                </div>
+                <div class="cart-header-container-row-left-icon">
+                    <div class="navbar__left--item">
+                        <a href="https://facebook.com/ShopeeVN" class="row__left--icon fab fa-facebook"
+                           title="Kết nối Facebook"></a>
+                        <a href="https://instagram.com/Shopee_VN" class="row__left--icon fab fab fa-instagram"
+                           title="Kết nối Instagram"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-header-container-row-right">
+                <div class="cart-header-container-row-right-title">
+                    <i class="fa-regular fa-bell" style="padding-left: 3px"></i> Thông báo
+                </div>
+                <div class="cart-header-container-row-right-title">
+                    <i class="fas fa-question-circle" style="padding-left: 3px"></i> Hỗ trợ
+                </div>
+                <div class="cart-header-container-row-right-title-rel">
+                    <a href="https://shopee.vn/user/purchase/" class="usermode__log">
+                        <img class="usermode--uicon" src="/resources/image/User-Avatar-PNG-Transparent-Image.png"
+                             alt="">
+                        <p class="navbar__right--link usermode--name " style="font-size: 1.4rem;">Đình Hiếu</p>
+                    </a>
+                    <ul class="usermode__menu navbar__subnav">
+                        <li class="usermode__menu--item">
+                            <a href="https://shopee.vn/user/account/">Tài khoản của tôi</a>
+                        </li>
+                        <li class="usermode__menu--item">
+                            <a href="https://shopee.vn/user/purchase/">Đơn mua</a>
+                        </li>
+                        <li class="usermode__menu--item">
+                            <a href="">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="cart-title">
+    <div class="cart-title-container">
+        <div class="cart-title-container-left">
+            <div class="px-2 md:px-15 mt-[-5px]">
+                <a href="https://shopee.vn/" class="flex items-end text-white no-underline mr-5">
+                    <i class="fab fa-shopify text-8xl md:text-8xl" style="color: #ee4d2d"></i>
+                    <div class="pl-2 text-6xl whitespace-nowrap md:block pb-4" style="color:#ee4d2d">Smart-Shop</div>
+                </a>
+            </div>
+            <div class="cart-title-container-left-text">
+                <p>Giỏ hàng</p>
+            </div>
+        </div>
+        <div class="cart-title-container-right">
+            <div class="cart-title-container-right-content">
+                <input class="cart-title-container-right-searchBar" type="text"/>
+                <div class="cart-title-container-right-searchIcon">
+                    <i class="fa-solid fa-magnifying-glass" style="color:white;font-size:14px" aria-hidden="true"></i>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cart-body">
+    <div class="cart-body-container">
+        <div class="cart-body-container-page-header">
+            <div class="cart-body-container-page-header-select">
+                <input type="checkbox" id="product" name="product">
+            </div>
+            <div class="cart-body-container-page-header-productName">Sản phẩm</div>
+            <div class="cart-body-container-page-header-category">Danh mục</div>
+            <div class="cart-body-container-page-header-unitPrice">Đơn giá</div>
+            <div class="cart-body-container-page-header-quantity">Số lượng</div>
+            <div class="cart-body-container-page-header-totalPrice">Số tiền</div>
+            <div class="cart-body-container-page-header-action">Thao tác</div>
+        </div>
+        <div class="cart-body-container-page-content">
+            <div class="cart-body-container-page-content-row header">
+                <div class="cart-body-container-page-content-row-shopName">
+                    Bestwish Tech Ⓡ Official Store
+                </div>
+            </div>
+            <div class="cart-body-container-page-content-row content">
+                <div class="cart-body-container-page-header-select content">
+                    <input type="checkbox"  name="product">
+                </div>
+                <div class="cart-body-container-page-header-productName content">
+                    <img
+                            class="cart-body-container-page-header-productName-img"
+                            src="/resources/image/product/product-nameee.jpg"
+                            alt=""
+                    />
+                    <p class="cart-body-container-page-header-productName-text">
+                        Giỏ ủ ấm tích 1,5L nhựa Minh Hải - Giành tích ủ ấm, Giỏ ủ ấm trà họa tiết Đồng Quê                    </p>
+                </div>
+                <div class="cart-body-container-page-header-category content">Giỏ ủ ấm</div>
+                <div class="cart-body-container-page-header-unitPrice content">₫235.000</div>
+                <div class="cart-body-container-page-header-quantity content">
+                    <div class="cart-body-container-page-header-quantity-container">
+                        <button onclick="decreaseQuantity()" type="button">-</button>
+                        <input type="text" name="quantity" onkeydown="return event.charCode >= 48 && event.charCode <= 57"
+                                oninput="validateInput()"
+                                value="1"
+                        />
+                        <button type="button" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+                <div class="cart-body-container-page-header-totalPrice content" style="color:#ee4d2d">
+                    ₫235.000
+                </div>
+                <div class="cart-body-container-page-header-action content">
+                    <button class="delete-button" onclick="deleteItem()">Xóa</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="cart-body-container-page-content">
+            <div class="cart-body-container-page-content-row header">
+                <div class="cart-body-container-page-content-row-shopName">
+                    Bestwish Tech Ⓡ Official Store
+                </div>
+            </div>
+            <div class="cart-body-container-page-content-row content">
+                <div class="cart-body-container-page-header-select content">
+                    <input type="checkbox"  name="product">
+                </div>
+                <div class="cart-body-container-page-header-productName content">
+                    <img
+                            class="cart-body-container-page-header-productName-img"
+                            src="/resources/image/product/product-nameee.jpg"
+                            alt=""
+                    />
+                    <p class="cart-body-container-page-header-productName-text">
+                        Giỏ ủ ấm tích 1,5L nhựa Minh Hải - Giành tích ủ ấm, Giỏ ủ ấm trà họa tiết Đồng Quê                    </p>
+                </div>
+                <div class="cart-body-container-page-header-category content">Giỏ ủ ấm</div>
+                <div class="cart-body-container-page-header-unitPrice content">₫235.000</div>
+                <div class="cart-body-container-page-header-quantity content">
+                    <div class="cart-body-container-page-header-quantity-container">
+                        <button onclick="decreaseQuantity()" type="button">-</button>
+                        <input
+                                type="text"
+                                name="quantity"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                oninput="validateInput()"
+                                value="1"
+                        />
+                        <button type="button" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+                <div class="cart-body-container-page-header-totalPrice content" style="color:#ee4d2d">
+                    ₫235.000
+                </div>
+                <div class="cart-body-container-page-header-action content">
+                    <button class="delete-button" onclick="deleteItem()">Xóa</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="cart-body-container-page-content">
+            <div class="cart-body-container-page-content-row header">
+                <div class="cart-body-container-page-content-row-shopName">
+                    Bestwish Tech Ⓡ Official Store
+                </div>
+            </div>
+            <div class="cart-body-container-page-content-row content">
+                <div class="cart-body-container-page-header-select content">
+                    <input type="checkbox"  name="product">
+                </div>
+                <div class="cart-body-container-page-header-productName content">
+                    <img
+                            class="cart-body-container-page-header-productName-img"
+                            src="/resources/image/product/product-nameee.jpg"
+                            alt=""
+                    />
+                    <p class="cart-body-container-page-header-productName-text">
+                        Giỏ ủ ấm tích 1,5L nhựa Minh Hải - Giành tích ủ ấm, Giỏ ủ ấm trà họa tiết Đồng Quê                    </p>
+                </div>
+                <div class="cart-body-container-page-header-category content">Giỏ ủ ấm</div>
+                <div class="cart-body-container-page-header-unitPrice content">₫235.000</div>
+                <div class="cart-body-container-page-header-quantity content">
+                    <div class="cart-body-container-page-header-quantity-container">
+                        <button onclick="decreaseQuantity()" type="button">-</button>
+                        <input
+                                type="text"
+                                name="quantity"
+                                id="quantity"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                oninput="validateInput()"
+                                value="1"
+                        />
+                        <button type="button" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+                <div class="cart-body-container-page-header-totalPrice content" style="color:#ee4d2d">
+                    ₫235.000
+                </div>
+                <div class="cart-body-container-page-header-action content">
+                    <button class="delete-button" onclick="deleteItem()">Xóa</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="cart-body-container-footer">
+            <div class="cart-body-container-footer-container">
+                <div class="cart-body-container-footer-container-cartTotalMoney">
+                    <p
+                            class="cart-body-container-footer-container-cartTotalMoney-info"
+                    >
+                        Tổng thanh toán (0 Sản phẩm):
+                    </p>
+                    <p
+                            class="cart-body-container-footer-container-cartTotalMoney-money"
+                    >
+                            đ18.000
+                    </p>
+                </div>
+                <div class="cart-body-container-footer-container-payment">
+                    <button type="button">Mua Hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer th:replace="footer_main::footer"></footer>
+
+<script>
+    function validateInput() {
+        let inputElement = document.getElementById('quantity');
+        let inputValue = inputElement.value;
+        if (inputValue.length === 1 && inputValue[0] === '0') {
+            inputElement.value = '';
+        }
+    }
+</script>
+</body>
+</html>

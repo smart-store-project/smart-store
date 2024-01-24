@@ -83,6 +83,15 @@
     flex-direction: column;
     gap: 3px;
 }
+.profile-body-right-my-wallet{
+    padding: 15px 15px;
+    border-bottom: 1px solid #3498db;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
 .profile-body-right-my-profile-title{
     font-size: 2rem;
 }
@@ -103,6 +112,11 @@
     grid-template-columns: 1fr 280px;
     padding: 30px 0 70px 0;
     gap: 50px;
+}
+.profile-edit-form-content p {
+    font-size: 1.8rem;
+    color: #27ae60;
+    font-weight: bold;
 }
 .profile-edit-form-content-left{
     display: flex;
