@@ -14,11 +14,11 @@
 <h1>Sorted Products</h1>
 
 <div>
-    <a th:href="@{/brands/view/sort?sortType=name&brandId=${brand.id}}" class="btn btn-info" role="button">Sorted
+    <a th:href="@{/brands/view/sort?sortType=name&brandId=__${brand.id}__}" class="btn btn-info" role="button">Sorted
         Product By Name</a>
-    <a th:href="@{/brands/view/sort?sortType=priceDesc&brandId=${brand.id}}" class="btn btn-info" role="button">Sorted
+    <a th:href="@{/brands/view/sort?sortType=priceDesc&brandId=__${brand.id}__}" class="btn btn-info" role="button">Sorted
         Product By Increase Price</a>
-    <a th:href="@{/brands/view/sort?sortType=priceAsc&brandId=${brand.id}}" class="btn btn-info" role="button">Sorted
+    <a th:href="@{/brands/view/sort?sortType=priceAsc&brandId=__${brand.id}__}" class="btn btn-info" role="button">Sorted
         Product By Decrease Price</a>
 </div>
 

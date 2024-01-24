@@ -46,7 +46,7 @@ public class CategoryController {
     public ModelAndView findCategory(@PathVariable Long id) {
         Category category = categoryService.findById(id);
         List<Product> products = productService.findAllByCategory(category);
-        ModelAndView view = new ModelAndView("category/view");
+        ModelAndView view = new ModelAndView("category/category-view");
         view.addObject("category", category);
         view.addObject("products", products);
         return view;
@@ -56,7 +56,7 @@ public class CategoryController {
     public ModelAndView getCategoryByBrand(@PathVariable Long id) {
         Brand brand = brandService.findById(id);
         Iterable<Category> categories = categoryService.findAllByBrand(brand);
-        ModelAndView view = new ModelAndView("category/brand");
+        ModelAndView view = new ModelAndView("brand1");
         view.addObject("categories", categories);
         return view;
     }

@@ -17,38 +17,38 @@ import java.util.List;
 @Controller
 @RequestMapping("/brands")
 public class BrandController {
-    private final IBrandService brandService;
+        private final IBrandService brandService;
 
-    private final IProductService productService;
+        private final IProductService productService;
 
-    private final ICategoryService categoryService;
+        private final ICategoryService categoryService;
 
-    public BrandController(IBrandService brandService, IProductService productService, ICategoryService categoryService) {
-        this.brandService = brandService;
-        this.productService = productService;
-        this.categoryService = categoryService;
-    }
+        public BrandController(IBrandService brandService, IProductService productService, ICategoryService categoryService) {
+            this.brandService = brandService;
+            this.productService = productService;
+            this.categoryService = categoryService;
+        }
 
-    @GetMapping("")
-    public ModelAndView showAllBrand() {
-        ModelAndView view = new ModelAndView("brand/list");
-        view.addObject("brands", brandService.findAll());
-        return view;
-    }
+        @GetMapping("")
+        public ModelAndView showAllBrand() {
+            ModelAndView view = new ModelAndView("/brand/brand-view");
+            view.addObject("brands", brandService.findAll());
+            return view;
+        }
 
-    @GetMapping("/{id}/view")
-    public ModelAndView viewBrand(@PathVariable Long id) {
-        Brand brand = brandService.findById(id);
-        List<Product> products = productService.findAllByBrand(brand);
-        Iterable<Category> categories = categoryService.findAllByBrand(brand);
-        ModelAndView view = new ModelAndView("brand/view");
-        view.addObject("brand", brand);
-        view.addObject("products", products);
-        view.addObject("categories", categories);
-        view.addObject("brandId", id);
+        @GetMapping("/{id}/view")
+        public ModelAndView viewBrand(@PathVariable Long id) {
+            Brand brand = brandService.findById(id);
+            List<Product> products = productService.findAllByBrand(brand);
+            Iterable<Category> categories = categoryService.findAllByBrand(brand);
+            ModelAndView view = new ModelAndView("brand/brand-view");
+            view.addObject("brand", brand);
+            view.addObject("products", products);
+            view.addObject("categories", categories);
+            view.addObject("brandId", id);
 
-        return view;
-    }
+            return view;
+        }
 
     @GetMapping("/view/sort")
     public ModelAndView getSortedProductForBrand(@RequestParam String sortType, @RequestParam Long brandId) {
@@ -67,12 +67,14 @@ public class BrandController {
             default:
                 sortedProducts = productService.findAllByBrand(brand);
         }
-        ModelAndView view = new ModelAndView("brand/sort");
-        view.addObject("sortedProducts", sortedProducts);
+        ModelAndView view = new ModelAndView("brand/brand-view");
+        view.addObject("products", sortedProducts);
         view.addObject("sortType", sortType);
+        view.addObject("brand", brand);
         return view;
     }
     @GetMapping("/{brandId}/view/category/{categoryId}")
+
     public ModelAndView viewProductsByBrandAndCategory(
             @PathVariable Long brandId,
             @PathVariable Long categoryId,
@@ -81,7 +83,7 @@ public class BrandController {
         Brand brand = brandService.findById(brandId);
         Category category = categoryService.findById(categoryId);
         Page<Product> products = productService.findProductsByBrandAndCategory(brand, category, pageable);
-        ModelAndView view = new ModelAndView("brand/view");
+        ModelAndView view = new ModelAndView("brand/brand-view");
         view.addObject("brand", brand);
         view.addObject("products", products);
         return view;

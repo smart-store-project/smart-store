@@ -36,7 +36,6 @@
             <a th:href="@{/categories/{id}/view(id=${category.id})}" th:text="${category != null ? category.name : ''}"
                style="text-decoration: none"></a>
         </td>
-
         <td>
             <a th:href="@{/categories/{id}/view(id=${category.id})}">
                 <img th:if="${category != null}" th:src="${category.imgURL}" alt=""/>

@@ -142,42 +142,17 @@
         <!-- End of Suggestion Category -->
         <!--Start of main brand-->
         <div class="category-container">
-            <h2 class="category-title">Danh Sách Nhãn Hàng</h2>
+            <h2 class="category-title">Danh Mục Nhãn Hàng</h2>
 
             <div class="brand-container">
-                <div class="brand">
-                    <a href="/path/to/brand/1" target="_blank">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
-                        <p class="brand-name">Nhãn Hàng 1</p>
+                <div class="brand" th:each="brand : ${brands}">
+                    <a th:href="@{/brands/{id}/view(id=${brand.id})}" target="_blank">
+                        <img th:href="@{/brands/{id}/view(id=${brand.id})}" th:if="${brand != null}"
+                             th:src="${brand.imgURL}" alt="Main category item img">
+                        <p class="brand-name" th:text="${brand != null ? brand.name : ''}"></p>
                     </a>
-                </div>
-                <div class="brand">
-                    <a href="/path/to/brand/1" target="_blank">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
-                        <p class="brand-name">Nhãn Hàng 1</p>
-                    </a>
-                </div>
-                <div class="brand">
-                    <a href="/path/to/brand/1" target="_blank">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
-                        <p class="brand-name">Nhãn Hàng 1</p>
-                    </a>
-                </div>
-                <div class="brand">
-                    <a href="/path/to/brand/1" target="_blank">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
-                        <p class="brand-name">Nhãn Hàng 1</p>
-                    </a>
-                </div>
-                <div class="brand">
-                    <a href="/path/to/brand/1" target="_blank">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img">
-                        <p class="brand-name">Nhãn Hàng 1</p>
-                    </a>
-                </div>
 
-
-                <!-- Thêm các nhãn hàng khác tại đây -->
+                </div>
 
             </div>
         </div>
@@ -189,144 +164,11 @@
 
 
             <div class="main-category__list">
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
+                <div class="main-category__item" th:each="category : ${categories}">
+                    <a th:href="@{/categories/{id}/view(id=${category.id})}" class="main-category__item-link">
+                        <img th:if="${category != null}" th:src="${category.imgURL}" alt="Main category item img"
                              class="main-category__item-img">
-                        <div class="main-category__item-text">Thời trang nam</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/phone.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Điện thoại và phụ kiện</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/screen.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Thiết bị điện tử</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/laptop.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Máy tính & Laptop</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/camera.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Máy ảnh và máy quay phim</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/watch.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Đồng Hồ</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/man-shoe.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Giày dép nam</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Thiết bị điện gia dụng</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Thể thao & du lịch</div>
-                    </a>
-                </div>
-                <div class="main-category__item" ..>
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Ô tô & xe máy & xe đạp</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Thời trang nữ</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Mẹ & bé</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Nhà cửa & đời sống</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Sắc đẹp</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Sức khỏe</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Giày dép nữ</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Túi ví nữ</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Phụ kiện & trang sức nữ</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Bách hóa online</div>
-                    </a>
-                </div>
-                <div class="main-category__item">
-                    <a href="#" class="main-category__item-link">
-                        <img src="../resources/image/category/T-Shirt.png" alt="Main category item img"
-                             class="main-category__item-img">
-                        <div class="main-category__item-text">Nhà sách online</div>
+                        <div class="main-category__item-text" th:text="${category != null ? category.name : ''}"></div>
                     </a>
                 </div>
             </div>
@@ -337,213 +179,24 @@
                 <p>Sản phẩm</p>
             </div>
             <div class="product-list__items">
-                <div class="product-item">
+                <div class="product-item" th:each="product : ${products}">
                     <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <div class="product-item__details">
-                        <div class="product-item__image">
-                            <img src="https://img.generation-nt.com/xiaomi-mix-fold-2_0687045a01683407.jpg"
-                                 alt="Product Image">
-                        </div>
-                        <div class="product-item__name">Áo Len Dạ Phối Hoạ Tiết Cổ Bẻ Cực Chất</div>
-                        <div class="product-item__price">
-                            <sub>đ</sub>75.000
-                        </div>
-                    </div>
-                </div>
+                        <a th:href="@{/products/{id}/view(id=${product.id})}">
 
+                            <div class="product-item__image">
+                                <img th:if="${product != null}" th:src="${product.imgURL}"
+                                     alt="Product Image">
+                            </div>
+                            <div class="product-item__name" th:text="${product != null ? product.name : ''}"></div>
+                        </a>
+
+                        <div class="product-item__price">
+                            <sub>đ</sub>
+                            <div th:text="${product != null ? product.price : ''}"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button class="body-loadMore" type="button">Xem thêm</button>
         </div>
     </div>
 </div>
