@@ -6,32 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Title</title>
 
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .order-container {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-details {
+            margin-top: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        /* Add more styles as needed for your specific design */
+    </style>
 </head>
 <body>
 <h1>Order</h1>
 
-<div th:each="orderStatus : ${orderStatuses}">
-    <a th:href="@{/user/orders(type=${orderStatus.id})}">
-        <span th:text="${orderStatus.name}"></span>
-    </a>
+<div th:if="${orders == null or orders.isEmpty()}">
+    <p>No orders available</p>
 </div>
-<div th:if="${orders == null}">
-    <p>Empty</p>
-</div>
-<div th:else="${orders == null}">
-    <div th:each="order : ${orders}">
-        <div th:each="orderDetail, orderStat : ${order.orderDetails}">
-            <a th:href="@{/products/view/{id}(id=${orderDetail.product.id})}">
-                <span th:text="img"></span>
+
+<div th:if="${orders != null and not #lists.isEmpty(orders)}">
+    <div th:each="order : ${orders}" class="order-container">
+        <div th:each="orderDetail, orderStat : ${order.orderDetails}" class="order-details">
+            <a th:href="@{/products/{id}/view(id=${orderDetail.product.id})}">
+                <img th:src="${orderDetail.product.imgURL}" alt="Product Image"/>
                 <span th:text="${orderDetail.product.name}"></span>
-                <span th:text="${orderDetail.quantity}"></span>
-                <span th:text="${orderDetail.getTotalPrice()}"></span>
-                <span th:text="${order.orderStatus.name}" th:if="${orderStat.count == 1}"></span>
             </a>
+            <p>Quantity: <span th:text="${orderDetail.quantity}"></span></p>
+            <p>Total Price: <span th:text="${orderDetail.getTotalPrice()}"></span></p>
+            <p th:if="${orderStat.count == 1}">Order Status: <span th:text="${order.orderStatus.name}"></span></p>
             <br>
             <a th:href="@{/user/orders/buyAgain/{id}(id=${order.id})}">Buy Again</a> ||
             <a th:href="@{/user/reviews/create/{id}(id=${orderDetail.product.id})}">Rate</a>
-
         </div>
     </div>
 </div>

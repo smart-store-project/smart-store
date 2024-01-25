@@ -749,3 +749,37 @@ border-radius: 50%;
 
 }
 
+p {
+	color: #FFFFFF;
+	font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+	font-size: 15px;
+	margin: 0;
+}
+
+i {
+	color: #9ABC66;
+	font-size: 50px;
+	line-height: 100px;
+	margin-left: -15px;
+}
+
+.customCard {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(0, 0, 0, 0.8);
+	padding: 30px;
+	border-radius: 4px;
+	box-shadow: 0 2px 3px #C8D0D8;
+	width: 300px;
+}
+
+.customCircle {
+	border-radius: 100px;
+	height: 100px;
+	width: 100px;
+	background: #F8FAF5;
+	margin: 0 auto;
+}

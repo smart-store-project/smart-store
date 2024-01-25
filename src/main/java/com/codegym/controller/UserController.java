@@ -24,7 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -84,6 +86,7 @@ public class UserController {
     public ModelAndView showNotifications(@ModelAttribute("user") UserDto userDto) {
         ModelAndView modelAndView = new ModelAndView("/user/notification");
         Iterable<Notification> notifications = notificationService.findByUser(userDto);
+        Collections.reverse((List<?>) notifications);
         modelAndView.addObject("notifications", notifications);
         return modelAndView;
     }

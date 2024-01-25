@@ -18,22 +18,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@SessionAttributes("cart")
 @RequestMapping("/user/cart")
 public class CartController {
 
     @Autowired
     private IProductService productService;
 
-    @ModelAttribute("cart")
-    public Cart setupCart(@ModelAttribute("user") UserDto userDto) {
-        CartItem cartItem1 = new CartItem(productService.findById(1L), 3);
-        CartItem cartItem2 = new CartItem(productService.findById(2L), 2);
-        Cart cart = new Cart(userDto.getId());
-        cart.getCart().add(cartItem1);
-        cart.getCart().add(cartItem2);
-        return cart;
-    }
+
 
     @ModelAttribute("user")
     private UserDto currentUser(HttpServletRequest request) {
@@ -42,7 +33,7 @@ public class CartController {
     }
 
     @GetMapping
-    public ModelAndView showCart(@ModelAttribute("cart") Cart cart) {
+    public ModelAndView showCart(@SessionAttribute("cart") Cart cart) {
         ModelAndView modelAndView = new ModelAndView("/user/cart");
         modelAndView.addObject("cart", cart);
         return modelAndView;

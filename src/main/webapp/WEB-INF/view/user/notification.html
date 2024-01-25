@@ -85,7 +85,7 @@
     <tr th:each="notification : ${notifications}" >
         <td th:text="${notification.title}"></td>
         <td th:text="${notification.description}"></td>
-        <td th:text="${notification.date}"></td>
+        <td th:text="${#dates.format(notification.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
     </tr>
 </table>
 
