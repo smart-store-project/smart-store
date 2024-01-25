@@ -25,7 +25,7 @@ public class OrderAPIController {
     @PostMapping
     public ResponseEntity<?> addOrder(@RequestBody Order order, @SessionAttribute("cartPay") Cart cart) {
         try {
-            orderService.addOrder(order, cart);
+//            orderService.addOrder(order, cart);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

@@ -15,6 +15,10 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    private String username;
+
     @NotNull
     private int rating;
     @NotBlank
@@ -75,4 +79,13 @@ public class Review {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }

@@ -44,7 +44,7 @@
         </div>
 
         <div class="login-content-item login-content-item-2">
-            <form action="hello-servlet" class="register-content-item-2-form" method="post">
+            <form th:action="@{/register/save}" class="register-content-item-2-form" method="post" th:object="${user}" id="myForm">
                 <div class="register-content-item-2-form-header">
                     <div class="register-container-content-item-2-form-header-item1">
                         Đăng Ký
@@ -52,18 +52,28 @@
                 </div>
                 <div class="register-container-content-item-2-form-body">
                     <div class="register-container-content-item-2-form-body-item-1">
-                        <input type="text" name="username" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Username" required />
-                        <input type="email" name="email" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Email" required />
-
+                        <input type="text" name="username" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Username" required th:field="*{username}" onchange="checkUsername()"/>
+                        <span id="username-error"></span>
+                        <span th:if="${#fields.hasErrors()}" th:errors="*{username}"></span>
+                        <input type="email" name="email" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Email" required  id="email" th:field="*{email}" onchange="checkEmail(); validateEmail()" />
+                        <span id="email-error1"></span>
+                        <span id="email-error2"></span>
+                        <span th:if="${#fields.hasErrors()}" th:errors="*{email}"></span>
                         <div class="login-container-content-item-2-form-body-item-1-passwordBox">
-                            <input type="password" class="login-container-content-item-2-form-body-item-1-inputPassword" placeholder="Mật khẩu" name="login-password" id="passwordInput" required  />
+                            <input type="password" class="login-container-content-item-2-form-body-item-1-inputPassword" placeholder="Mật khẩu" name="login-password" id="passwordInput" th:field="*{password}" min="8" max="30" onchange="checkPass()" required  />
                             <div class="login-container-content-item-2-form-body-item-1-inputPassword-eyeIcon" onclick="togglePasswordVisibility()">
                                 <div class="login-container-content-item-2-form-body-item-1-inputPassword-openEyeIcon"></div>
                             </div>
+                            <span id="password-error"></span>
+                            <span th:if="${#fields.hasErrors()}" th:errors="*{password}"></span>
                         </div>
-                        <input type="number" name="phoneNumber" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="phoneNumber" required />
-                        <input type="text" name="address" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Address" required />
-
+                        <input type="number" name="phoneNumber" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="phoneNumber" id="phoneNumber" th:field="*{phoneNumber}" onchange="checkPhoneNumber(); validatePhone()" required />
+                        <span id="phone-number-error1"></span>
+                        <span id="phone-number-error2"></span>
+                        <span th:if="${#fields.hasErrors()}" th:errors="*{phoneNumber}"></span>
+                        <input type="text" name="address" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Address" th:field="*{address}" required />
+                        <span id="address-number-error"></span>
+                        <span th:if="${#fields.hasErrors()}" th:errors="*{address}"></span>
                         <button type="submit" class="login-container-content-item-2-form-body-item-1-submitLogin">
                             ĐĂNG KÝ
                         </button>
@@ -120,5 +130,106 @@
     </div>
 </div>
 <footer th:replace="footer_main::footer"></footer>
+<script>
+    function checkPass() {
+        let pass = document.getElementById("passwordInput").value;
+        if (pass.length < 8 || pass.length > 30) {
+            document.getElementById("password-error").innerHTML = "Password between 8 and 30";
+            return false;
+        } else {
+            document.getElementById("password-error").innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateEmail() {
+        let emailInput = document.getElementById('email');
+        let emailValue = emailInput.value;
+
+        let emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        if (emailRegex.test(emailValue)) {
+            document.getElementById('email-error1').innerHTML = "";
+            return true;
+        } else {
+            document.getElementById('email-error1').innerHTML = 'Invalid email';
+            return false;
+        }
+    }
+
+
+    function validatePhone() {
+        let phoneInput = document.getElementById('phoneNumber');
+        let phoneValue = phoneInput.value;
+        let phoneRegex = /^(0[35789])+([0-9]{8})$/;
+
+        if (!phoneRegex.test(phoneValue)) {
+            document.getElementById('phone-number-error1').innerHTML = 'Invalid phone number';
+            return false;
+        } else {
+            document.getElementById('phone-number-error1').innerHTML = "";
+            return true;
+        }
+
+    }
+    function checkUsername() {
+        let username = $("#username").val();
+        $.ajax({
+            type: "GET",
+            url: `http://localhost:8080/api/users/checkUsername/${username}`,
+            success: function (data) {
+                if (data === "true") {
+                    document.getElementById("username-error").innerHTML = "Username is already existed"
+                } else {
+                    document.getElementById("username-error").innerHTML = "";
+                }
+            }
+        })
+    }
+
+    function checkEmail(data) {
+        let email = $("#email").val();
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/api/users/checkUsername/" + email,
+            success: function (data) {
+                if (data === "true") {
+                    document.getElementById("email-error2").innerHTML = "Email is already existed";
+                } else {
+                    document.getElementById("email-error2").innerHTML = "";
+                }
+            }
+        })
+    }
+
+    function checkPhoneNumber() {
+        let phoneNumber = $("#phoneNumber").val();
+        $.ajax({
+            type: "GET",
+            url:  `http://localhost:8080/api/users/checkUsername/` + phoneNumber,
+            success: function (data) {
+                if (data === "true") {
+                    document.getElementById("phone-number-error2").innerHTML = "Phone number is already existed"
+                } else {
+                    document.getElementById("phone-number-error2").innerHTML = "";
+                }
+            }
+        });
+    }
+
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let phoneError = document.getElementById("phone-number-error2").innerText;
+        let emailError = document.getElementById("email-error2").innerText;
+        let usernameError = document.getElementById("username-error").innerText;
+        console.log("phone error " + phoneError);
+        console.log("emailError " + emailError);
+        console.log("usernameError " + usernameError);
+        console.log("validate email " + validateEmail());
+        console.log("validate phone " + validatePhone());
+        if (validateEmail() && validatePhone() && phoneError==="" && emailError==="" && usernameError === "") {
+            this.submit();
+        }
+    });
+</script>
 </body>
 </html>

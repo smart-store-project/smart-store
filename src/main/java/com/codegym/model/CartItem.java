@@ -4,9 +4,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 public class CartItem {
-    private Product product;
     private Long id;
-
+    private Product product;
     private int quantity;
 
     public CartItem() {

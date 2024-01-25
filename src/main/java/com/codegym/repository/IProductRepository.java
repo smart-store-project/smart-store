@@ -60,7 +60,7 @@ Page<Product> findProductsByBrandAndCategory(@Param("brand") Brand brand, @Param
             "JOIN p.category c " +
             "JOIN c.brand b " +
             "WHERE b = :brand")
-    Page<Product> findProductByBrand(Brand brand, Pageable pageable);
+    Page<Product> findProductByBrand(@Param("brand") Brand brand, Pageable pageable);
 
 
 

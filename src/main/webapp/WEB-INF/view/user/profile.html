@@ -40,17 +40,21 @@
                 <div class="profile-body-left-menu-item-option-item">Đổi mật khẩu</div>
             </div>
             <div class="profile-body-left-menu-item">
-                <div class="profile-icon">
-                    <img src="https://down-vn.img.susercontent.com/file/f0049e9df4e536bc3e7f140d071e9078" alt=""/>
-                </div>
-                <span style="font-size: 1.5rem;"> Đơn mua </span>
+                <a th:href="@{/user/orders}">
+                    <div class="profile-icon">
+                        <img src="https://down-vn.img.susercontent.com/file/f0049e9df4e536bc3e7f140d071e9078" alt=""/>
+                    </div>
+                    <span style="font-size: 1.5rem;"> Đơn mua </span>
+                </a>
             </div>
 
             <div class="profile-body-left-menu-item">
-                <div class="profile-icon">
-                    <img src="https://down-vn.img.susercontent.com/file/e10a43b53ec8605f4829da5618e0717c" alt=""/>
-                </div>
-                <span style="font-size: 1.5rem;"> Thông báo </span>
+                <a th:href="@{/user/notifications}">
+                    <div class="profile-icon">
+                        <img src="https://down-vn.img.susercontent.com/file/e10a43b53ec8605f4829da5618e0717c" alt=""/>
+                    </div>
+                    <span style="font-size: 1.5rem;"> Thông báo </span>
+                </a>
             </div>
             <div class="profile-body-left-menu-item">
                 <div class="profile-icon">
@@ -66,6 +70,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" th:value="${type}" id="account-profile-type">
     <div class="profile-body-right">
         <div class="profile-body-right-transfer">
             <div id="profile-my-profile-content" style="display: block;">
@@ -73,20 +78,23 @@
                     <div class="profile-body-right-my-profile-title">Hồ sơ của tôi</div>
                     <span style="font-size: 1.5rem">Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
                 </div>
-                <form action="#" id="profile-edit-form" method="post">
+                <span id="notification"></span>
+<!--                <form action="#" id="profile-edit-form" method="post">-->
+                <div id="profile-edit-form">
                     <input type="hidden" name="id" value="id">
                     <div class="profile-edit-form-content">
                         <div class="profile-edit-form-content-left">
                             <div class="profile-edit-form-content-left-field">
                                 <div class="profile-edit-form-content-title">Tên đăng nhập</div>
-                                <div class="profile-edit-form-content-input">Đình Hiếu</div>
+                                <p th:text="${user.username}"></p>
+<!--                                <div class="profile-edit-form-content-input">Đình Hiếu</div>-->
                             </div>
                             <div class="profile-edit-form-content-left-field">
                                 <label for="profile-edit-field-email"
                                        class="profile-edit-form-content-title">Email</label>
                                 <div class="profile-edit-form-content-input">
                                     <input type="hidden" name="email" value="hieun4587@gmail.com">
-                                    <input id="profile-edit-field-email" value="hieun4587@gmail.com" type="text"
+                                    <input id="profile-edit-field-email" th:value="${user.email}" type="text"
                                            spellcheck="false" disabled>
                                     <span id="profile-edit-field-email-action"
                                           class="profile-edit-field-action" onclick="enableEmailEdit()">Change</span>
@@ -97,7 +105,7 @@
                                     thoại</label>
                                 <div class="profile-edit-form-content-input">
                                     <input type="hidden" name="phoneNumber" value="0865283701">
-                                    <input id="profile-edit-field-phoneNumber" value="0865283701" type="text"
+                                    <input id="profile-edit-field-phoneNumber" th:value="${user.phoneNumber}" type="text"
                                            placeholder="Not added yet" minlength="10" maxlength="10" spellcheck="false"
                                            disabled>
                                     <span id="profile-edit-field-phone-action"
@@ -108,18 +116,18 @@
                                 <div class="profile-edit-form-content-title">Giới tính</div>
                                 <div class="profile-edit-form-content-input">
                                     <div class=profile-gender-input-radio>
-                                        <input type="radio" name="gender" id="profile-gender-male" value="male" checked>
-                                        <label for="profile-gender-male">Name</label>
+                                        <input type="radio" name="gender" id="profile-gender-male" value="male" >
+                                        <label for="profile-gender-male">Nam</label>
 
                                     </div>
                                     <div class="profile-gender-input-radio">
                                         <input type="radio" name="gender" id="profile-gender-female" value="female"
-                                               checked>
+                                               >
                                         <label for="profile-gender-female">Nữ</label>
                                     </div>
                                     <div class="profile-gender-input-radio">
                                         <input type="radio" name="gender" id="profile-gender-other" value="other"
-                                               checked>
+                                               >
                                         <label for="profile-gender-other">Khác</label>
                                     </div>
                                 </div>
@@ -139,7 +147,7 @@
                             <div class="profile-edit-form-content-left-field">
                                 <div class="profile-edit-form-content-title"></div>
                                 <div class="profile-edit-form-content-input">
-                                    <button class="profile-edit-save-btn" type="submit">Save</button>
+                                    <button class="profile-edit-save-btn" onclick="save()">Lưu</button>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +168,7 @@
                         </div>
                     </div>
 
-                </form>
+                </div>
             </div>
             <div id="profile-address-content" style="display: none;">
                 <div id="profile-address-wrap">
@@ -178,8 +186,8 @@
                                     <div class="profile__address--card-name-phone-wrp">
                                         <div class="profile__address--card-user-name">
                                             <div class="profile__address--card-name-phone-wrp">
-                                                <div class="profile__address--card-user-name">Nguyễn Lê Đình Hiếu</div>
-                                                <div class="profile__address--card-user-phone"><span>(+84)</span>
+                                                <div class="profile__address--card-user-name" th:text="${user.username}">Nguyễn Lê Đình Hiếu</div>
+                                                <div class="profile__address--card-user-phone" th:text="${user.phoneNumber}"><span>(+84)</span>
                                                     865283701
                                                 </div>
                                             </div>
@@ -194,7 +202,7 @@
 
                                     <div class="profile__address--card-address-detail">
                                         <div class="profile__address--card-detail">Địa chỉ</div>
-                                        <div class="profile__address--card-address-name">Chợ Đêm Thiên Bình, Đường Hàm
+                                        <div class="profile__address--card-address-name" th:text="${user.address}">Chợ Đêm Thiên Bình, Đường Hàm
                                             Nghi, Khu Phố Thiên Bình
                                             Phường Tam Phước, Thành Phố Biên Hòa, Đồng Nai
                                         </div>
@@ -229,15 +237,18 @@
                             </div>
                         </div>
                         <div class="profile-address-form-foot">
-                            <button id="profile-address-form-back-btn-update" class="profile-address-form-back-btn" type="button"
+                            <button id="profile-address-form-back-btn-update" class="profile-address-form-back-btn"
+                                    type="button"
                                     onclick="closeAddAddressDialog()">Trở lại
                             </button>
-                            <button id="profile-address-form-complete-btn-update" class="profile-address-form-complete-btn" type="submit">Hoàn thành</button>
+                            <button id="profile-address-form-complete-btn-update"
+                                    class="profile-address-form-complete-btn" type="submit">Hoàn thành
+                            </button>
                         </div>
                     </form>
                 </dialog>
                 <dialog id="profile-dialog-add-address" class="profile-dialog-add-address">
-                    <form action="#" id="profile-address-form-add-new" method="POST"
+                    <div id="profile-address-form-add-new"
                           class="profile-address-form-add-new">
                         <div class="profile-address-form-head">Địa chỉ mới</div>
                         <div class="profile-address-form-body">
@@ -256,12 +267,15 @@
                             </div>
                         </div>
                         <div class="profile-address-form-foot">
-                            <button id="profile-address-form-back-btn-add" class="profile-address-form-back-btn" type="button"
+                            <button id="profile-address-form-back-btn-add" class="profile-address-form-back-btn"
+                                    type="button"
                                     onclick="closeAddAddressDialog()">Trở lại
                             </button>
-                            <button id="profile-address-form-complete-btn-add" class="profile-address-form-complete-btn" type="submit">Hoàn thành</button>
+                            <button id="profile-address-form-complete-btn-add" class="profile-address-form-complete-btn"
+                                    onclick="changeAddress()">Hoàn thành
+                            </button>
                         </div>
-                    </form>
+                    </div>
                 </dialog>
             </div>
             <div id="profile-my-wallet-content" style="display: none;">
@@ -269,26 +283,31 @@
                     <div class="profile-body-right-my-profile-title">Ví điện tử của tôi</div>
                 </div>
                 <div class="profile-wallet-form-content">
-                    <p style="font-size: 2rem;margin-top: 20px" >Số dư khả dụng: 2000đ</p>
+                    <p style="font-size: 2rem;margin-top: 20px" th:text="${'Số dư khả dụng: ' + user.wallet.balance}">Số dư khả dụng: 2000đ</p>
                 </div>
 
             </div>
         </div>
         <dialog id="profile-dialog-remove-address" class="profile-dialog-remove-address">
-            <form action="#" id="profile-address-form-remove" method="POST" class="profile-address-form-remove" onsubmit="confirmDelete(event)">
+            <form action="#" id="profile-address-form-remove" method="POST" class="profile-address-form-remove"
+                  onsubmit="confirmDelete(event)">
                 <div class="profile-address-form-head">Xác nhận xóa</div>
                 <div class="profile-address-form-body">
                     <p style="font-size: 1.2rem">Bạn có chắc chắn muốn xóa không?</p>
                 </div>
                 <div class="cprofile-address-form-foot">
-                    <button id="profile-address-form-back-btn-remove"  class="profile-address-form-back-btn" type="button" onclick="closeDeleteDialog()">Hủy bỏ</button>
-                    <button id="profile-address-form-complete-btn-remove" class="profile-address-form-complete-btn" type="submit">Xóa</button>
+                    <button id="profile-address-form-back-btn-remove" class="profile-address-form-back-btn"
+                            type="button" onclick="closeDeleteDialog()">Hủy bỏ
+                    </button>
+                    <button id="profile-address-form-complete-btn-remove" class="profile-address-form-complete-btn"
+                            type="submit">Xóa
+                    </button>
                 </div>
             </form>
         </dialog>
     </div>
 </div>
-</div>
+
 <footer th:replace="footer_main::footer"></footer>
 <script>
     function toggleMenu() {
@@ -336,6 +355,7 @@
     }
 
     function showProfile() {
+        profile();
         document.getElementById('profile-my-profile-content').style.display = 'block';
         document.getElementById('profile-address-content').style.display = 'none';
         document.getElementById('profile-my-wallet-content').style.display = 'none';
@@ -348,7 +368,8 @@
         document.getElementById('profile-my-wallet-content').style.display = 'none';
 
     }
-    function showWallet(){
+
+    function showWallet() {
         document.getElementById('profile-my-wallet-content').style.display = 'block';
         document.getElementById('profile-my-profile-content').style.display = 'none';
         document.getElementById('profile-address-content').style.display = 'none';
@@ -381,16 +402,113 @@
         dialog.classList.remove('active');
         dialog1.classList.remove('active');
     }
+
     overlay.onclick = function () {
         closeDeleteDialog();
     };
-    function openRemoveAddressDialog(){
+
+    function openRemoveAddressDialog() {
         overlay.classList.add('active');
         dialogRemove.classList.add('active');
     }
-    function closeDeleteDialog(){
+
+    function closeDeleteDialog() {
         overlay.classList.remove('active');
         dialogRemove.classList.remove('active');
+    }
+
+    function changeAddress() {
+        let newAddress= document.getElementById("profile-address-inp-address-add").value;
+        $.ajax({
+            type: 'PUT',
+            url: 'http://localhost:8080/api/users/address',
+            data: JSON.stringify(newAddress),
+            success: function () {
+                window.location.href = '/user/account/address';
+            },
+            error: function () {
+                console.log("can not update address")
+            }
+        })
+    }
+
+
+
+    function save() {
+        let genderBefore = localStorage.getItem("gender");
+        let dayBefore = localStorage.getItem("day");
+        let monthBefore = localStorage.getItem("month");
+        let yearBefore = localStorage.getItem("year");
+
+        let radioButton = document.querySelector('input[name="gender"]:checked');
+        let gender = radioButton ? radioButton.value : "";
+        let day = document.getElementById("day").value;
+        let month = document.getElementById("month").value;
+        let year = document.getElementById("year").value;
+        console.log("before " + genderBefore);
+        console.log("after " + gender);
+
+        if (genderBefore !== gender) {
+            localStorage.setItem("gender", gender);
+        }
+        if (dayBefore !== day) {
+            localStorage.setItem("day", day);
+        }
+        if (monthBefore !== month) {
+            localStorage.setItem("month", month);
+        }
+        if (yearBefore !== year) {
+            localStorage.setItem("year", year);
+        }
+
+        if (genderBefore !== gender || dayBefore !== day || monthBefore !== month || yearBefore !== year) {
+            showNotification();
+        }
+
+    }
+
+    function showNotification() {
+        document.getElementById("notification").innerText = "update user profile successfully";
+        setTimeout(function () {
+            document.getElementById("notification").innerText = "";
+        }, 2000);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let type = document.getElementById("account-profile-type").value;
+        switch (type) {
+            case 'address':
+                showAddress();
+                break;
+            case 'wallet':
+                showWallet();
+                break;
+            default:
+                showProfile();
+        }
+
+
+    })
+
+    function profile() {
+        let storedGender = localStorage.getItem("gender");
+        let storedDay = localStorage.getItem("day");
+        let storedMonth = localStorage.getItem("month");
+        let storedYear = localStorage.getItem("year");
+
+        // document.getElementById("name").value = storedName || "";
+        document.getElementById("day").value = storedDay || "";
+        document.getElementById("month").value = storedMonth || "";
+        document.getElementById("year").value = storedYear || "";
+
+        if (storedGender === "male") {
+            document.getElementById("profile-gender-male").checked = true;
+        } else if (storedGender === "female") {
+            document.getElementById("profile-gender-female").checked = true;
+        } else {
+            document.getElementById("profile-gender-other").checked = true;
+        }
+
     }
 
 </script>

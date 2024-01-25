@@ -5,7 +5,103 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Title</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        img {
+            max-width: 60px;
+            border-radius: 5px;
+        }
+
+        td {
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        td, th {
+            transition: background-color 0.3s ease;
+        }
+
+
+    </style>
 </head>
 <body>
+<h1>Order View</h1>
+<table>
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Unit price</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+
+    <tr th:each="orderDetail : ${order.orderDetails}" th:attr="data-product-id=${orderDetail.product.id}" onclick="navigateToProduct(this)" style="cursor: pointer;">
+            <td>
+                <img th:src="@{orderDetail.product.imgURL}" alt="">
+            </td>
+            <td th:text="${orderDetail.product.name}"></td>
+            <td th:text="${orderDetail.product.price}"></td>
+            <td th:text="${orderDetail.quantity}"></td>
+            <td th:text="${orderDetail.getTotalPrice()}"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td th:text="${'Total price ' + order.getTotalPrice()}"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td th:text="${'Status ' + order.orderStatus}"></td>
+    </tr>
+</table>
+<script>
+    function navigateToProduct(element) {
+        let productId = element.getAttribute('data-product-id');
+        window.location.href = "/products/" + productId + "/view";
+    }
+</script>
 </body>
 </html>

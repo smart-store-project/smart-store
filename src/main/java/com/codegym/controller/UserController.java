@@ -63,7 +63,7 @@ public class UserController {
 
     @ExceptionHandler({DuplicateUsernameException.class})
     public ModelAndView duplicateUsernameException() {
-        ModelAndView modelAndView = new ModelAndView("/register");
+        ModelAndView modelAndView = new ModelAndView("user/register");
         modelAndView.addObject("message", "Username or email or phone number already exists");
         return modelAndView;
     }
@@ -71,7 +71,7 @@ public class UserController {
     @GetMapping({"/account/{type}", "/account"})
     public ModelAndView showAccountInfo(@PathVariable(value = "type", required = false) String type,
                                         @ModelAttribute("user") UserDto userDto) {
-        ModelAndView modelAndView = new ModelAndView("/user/account");
+        ModelAndView modelAndView = new ModelAndView("/user/profile");
         modelAndView.addObject("user", userDto );
         if (type == null) {
             type = "profile";
