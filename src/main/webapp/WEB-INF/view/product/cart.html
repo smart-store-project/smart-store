@@ -105,53 +105,14 @@
                 <input type="checkbox" id="product" name="product">
             </div>
             <div class="cart-body-container-page-header-productName">Sản phẩm</div>
-            <div class="cart-body-container-page-header-category">Danh mục</div>
             <div class="cart-body-container-page-header-unitPrice">Đơn giá</div>
             <div class="cart-body-container-page-header-quantity">Số lượng</div>
             <div class="cart-body-container-page-header-totalPrice">Số tiền</div>
             <div class="cart-body-container-page-header-action">Thao tác</div>
         </div>
-        <div class="cart-body-container-page-content">
-            <div class="cart-body-container-page-content-row header">
-                <div class="cart-body-container-page-content-row-shopName">
-                    Bestwish Tech Ⓡ Official Store
-                </div>
-            </div>
-            <div class="cart-body-container-page-content-row content">
-                <div class="cart-body-container-page-header-select content">
-                    <input type="checkbox"  name="product">
-                </div>
-                <div class="cart-body-container-page-header-productName content">
-                    <img
-                            class="cart-body-container-page-header-productName-img"
-                            src="/resources/image/product/product-nameee.jpg"
-                            alt=""
-                    />
-                    <p class="cart-body-container-page-header-productName-text">
-                        Giỏ ủ ấm tích 1,5L nhựa Minh Hải - Giành tích ủ ấm, Giỏ ủ ấm trà họa tiết Đồng Quê                    </p>
-                </div>
-                <div class="cart-body-container-page-header-category content">Giỏ ủ ấm</div>
-                <div class="cart-body-container-page-header-unitPrice content">₫235.000</div>
-                <div class="cart-body-container-page-header-quantity content">
-                    <div class="cart-body-container-page-header-quantity-container">
-                        <button onclick="decreaseQuantity()" type="button">-</button>
-                        <input type="text" name="quantity" onkeydown="return event.charCode >= 48 && event.charCode <= 57"
-                                oninput="validateInput()"
-                                value="1"
-                        />
-                        <button type="button" onclick="increaseQuantity()">+</button>
-                    </div>
-                </div>
-                <div class="cart-body-container-page-header-totalPrice content" style="color:#ee4d2d">
-                    ₫235.000
-                </div>
-                <div class="cart-body-container-page-header-action content">
-                    <button class="delete-button" onclick="deleteItem()">Xóa</button>
-                </div>
+        <span id="cart-empty"></span>
 
-            </div>
-        </div>
-        <div class="cart-body-container-page-content">
+        <div class="cart-body-container-page-content" th:each="cartItem : ${cart.getCart()}">
             <div class="cart-body-container-page-content-row header">
                 <div class="cart-body-container-page-content-row-shopName">
                     Bestwish Tech Ⓡ Official Store
@@ -159,78 +120,35 @@
             </div>
             <div class="cart-body-container-page-content-row content">
                 <div class="cart-body-container-page-header-select content">
-                    <input type="checkbox"  name="product">
+                    <input type="checkbox" onclick="chooseItem(event)" data-th-id="${cartItem.product.id}" name="product">
                 </div>
                 <div class="cart-body-container-page-header-productName content">
                     <img
                             class="cart-body-container-page-header-productName-img"
-                            src="/resources/image/product/product-nameee.jpg"
+                            th:src="${cartItem.product.getImgURL()}"
                             alt=""
                     />
-                    <p class="cart-body-container-page-header-productName-text">
-                        Giỏ ủ ấm tích 1,5L nhựa Minh Hải - Giành tích ủ ấm, Giỏ ủ ấm trà họa tiết Đồng Quê                    </p>
+                    <p class="cart-body-container-page-header-productName-text"  th:text="${cartItem.product.name}">
+                                     </p>
                 </div>
-                <div class="cart-body-container-page-header-category content">Giỏ ủ ấm</div>
-                <div class="cart-body-container-page-header-unitPrice content">₫235.000</div>
+                <div class="cart-body-container-page-header-unitPrice content" ${cartItem.product.price}>₫235.000</div>
                 <div class="cart-body-container-page-header-quantity content">
                     <div class="cart-body-container-page-header-quantity-container">
-                        <button onclick="decreaseQuantity()" type="button">-</button>
+                        <button class="hover-effect" onclick="desItem(event)" type="button">-</button>
                         <input
                                 type="text"
                                 name="quantity"
                                 onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                oninput="validateInput()"
+                                oninput="validateQuantity(event)"
+                                onchange="changeQuantity(event)"
+                                th:value="${cartItem.quantity}"
                                 value="1"
                         />
-                        <button type="button" onclick="increaseQuantity()">+</button>
+                        <button type="button" class="hover-effect"  onclick="incItem(event)">+</button>
                     </div>
                 </div>
-                <div class="cart-body-container-page-header-totalPrice content" style="color:#ee4d2d">
-                    ₫235.000
-                </div>
-                <div class="cart-body-container-page-header-action content">
-                    <button class="delete-button" onclick="deleteItem()">Xóa</button>
-                </div>
+                <div class="cart-body-container-page-header-totalPrice content" style="color:#ee4d2d" th:text="${cartItem.product.price}">
 
-            </div>
-        </div>
-        <div class="cart-body-container-page-content">
-            <div class="cart-body-container-page-content-row header">
-                <div class="cart-body-container-page-content-row-shopName">
-                    Bestwish Tech Ⓡ Official Store
-                </div>
-            </div>
-            <div class="cart-body-container-page-content-row content">
-                <div class="cart-body-container-page-header-select content">
-                    <input type="checkbox"  name="product">
-                </div>
-                <div class="cart-body-container-page-header-productName content">
-                    <img
-                            class="cart-body-container-page-header-productName-img"
-                            src="/resources/image/product/product-nameee.jpg"
-                            alt=""
-                    />
-                    <p class="cart-body-container-page-header-productName-text">
-                        Giỏ ủ ấm tích 1,5L nhựa Minh Hải - Giành tích ủ ấm, Giỏ ủ ấm trà họa tiết Đồng Quê                    </p>
-                </div>
-                <div class="cart-body-container-page-header-category content">Giỏ ủ ấm</div>
-                <div class="cart-body-container-page-header-unitPrice content">₫235.000</div>
-                <div class="cart-body-container-page-header-quantity content">
-                    <div class="cart-body-container-page-header-quantity-container">
-                        <button onclick="decreaseQuantity()" type="button">-</button>
-                        <input
-                                type="text"
-                                name="quantity"
-                                id="quantity"
-                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                oninput="validateInput()"
-                                value="1"
-                        />
-                        <button type="button" onclick="increaseQuantity()">+</button>
-                    </div>
-                </div>
-                <div class="cart-body-container-page-header-totalPrice content" style="color:#ee4d2d">
-                    ₫235.000
                 </div>
                 <div class="cart-body-container-page-header-action content">
                     <button class="delete-button" onclick="deleteItem()">Xóa</button>
@@ -249,12 +167,13 @@
                     </p>
                     <p
                             class="cart-body-container-footer-container-cartTotalMoney-money"
+                            id="cartTotalPrice" th:text="${cart.getTotalPrice()}"
                     >
-                            đ18.000
+
                     </p>
                 </div>
                 <div class="cart-body-container-footer-container-payment">
-                    <button type="button">Mua Hàng</button>
+                    <button type="button" onclick="checkout()">Mua Hàng</button>
                 </div>
             </div>
         </div>
@@ -270,6 +189,136 @@
         if (inputValue.length === 1 && inputValue[0] === '0') {
             inputElement.value = '';
         }
+    }
+    function desItem(event) {
+        let button = event.target;
+        let currentNode = button.closest('.cart-body-container-page-content-row');
+        let currentQuantity = parseInt(currentNode.querySelector('.cart-body-container-page-header-quantity-container input').value, 10);
+        updateQuantity(event, currentQuantity - 1);
+    }
+    function incItem(event) {
+        let button = event.target;
+        let currentNode = button.closest('.cart-body-container-page-content-row');
+        let currentQuantity = parseInt(currentNode.querySelector('.cart-body-container-page-header-quantity-container input').value, 10);
+        updateQuantity(event, currentQuantity + 1);
+    }
+    function deleteItem(event) {
+        updateQuantity(event, 0);
+    }
+    function changeQuantity(event) {
+        let button = event.target;
+        let currentNode = button.closest('.cart-body-container-page-content-row');
+        let newQuantity = currentNode.querySelector('.cart-body-container-page-header-quantity-container input').value;
+        updateQuantity(event, newQuantity);
+    }
+    function validateQuantity(event) {
+        let button = event.target;
+        let currentNode = button.closest('.cart-body-container-page-content-row');
+        let inputNode = currentNode.querySelector('.cart-body-container-page-header-quantity-container input');
+        let inputValue = inputNode.value;
+        inputValue = inputValue.replace(/\D/g, '');
+        inputValue = inputValue.replace(/^0+/, '');
+        inputNode.value = inputValue;
+    }
+    function updateQuantity(event, quantity) {
+        let button = event.target;
+        let currentNode = button.closest('.cart-body-container-page-content-row'); // Sử dụng '.cart-body-container-page-content-row' thay vì 'tr'
+        let id = currentNode.querySelector('.cart-body-container-page-header-productName-text').textContent.trim(); // Sử dụng '.cart-body-container-page-header-productName-text' thay vì 'td:nth-child(2)'
+
+        if (quantity > 0) {
+            $.ajax({
+                type: "PUT",
+                url: `http://localhost:8080/api/cart/` + id + `?quantity=` + quantity,
+                success: function (data) {
+                    let row = currentNode.querySelector('.cart-body-container-page-header-quantity-container input'); // Sử dụng '.cart-body-container-page-header-quantity-container input' thay vì 'td:nth-child(6) label input'
+                    row.value = data;
+                    let unitPrice = parseFloat(currentNode.querySelector('.cart-body-container-page-header-unitPrice').textContent.trim()); // Sử dụng '.cart-body-container-page-header-unitPrice' thay vì 'td:nth-child(5)'
+                    let totalPriceNode = currentNode.querySelector('.cart-body-container-page-header-totalPrice'); // Sử dụng '.cart-body-container-page-header-totalPrice' thay vì 'td:nth-child(7)'
+                    let newTotalPrice = unitPrice * data;
+                    totalPriceNode.textContent = newTotalPrice;
+                    updateCartTotalPrice();
+                },
+                error: function (error) {
+                    console.error("Error updating quantity: " + error);
+                }
+            });
+        } else {
+            $.ajax({
+                type: "DELETE",
+                url: `http://localhost:8080/api/cart/` + id,
+                success: function (data) {
+                    console.log("delete success" + data);
+                    currentNode.remove();
+                    updateCartTotalPrice();
+                },
+                error: function (error) {
+                    console.error("Error delete cart item: " + error);
+                }
+            });
+        }
+    }
+
+    let items = [];
+
+    function chooseItem(event) {
+        let checkbox = event.target;
+
+        if (checkbox.checked) {
+            let currentNode = checkbox.closest('.cart-body-container-page-content-row');
+            let idElement = currentNode.querySelector('.cart-body-container-page-header-productName-text'); // Sử dụng '.cart-body-container-page-header-productName-text' thay vì 'td:nth-child(2)'
+
+            if (idElement) {
+                let id = idElement.textContent.trim();
+
+                if (!items.includes(id)) {
+                    items.push(id);
+                    console.log("Added to cart - Item ID: " + id);
+                } else {
+                    items = items.filter(item => item !== id);
+                    console.log("Removed from cart - Item ID: " + id);
+                }
+            }
+        }
+    }
+    function checkout() {
+        console.log("cart list: " + items);
+
+        if (isCartPayEmpty() && items.length === 0) {
+            document.getElementById("cart-empty").innerHTML = "No things to check out";
+        } else {
+            document.getElementById("cart-empty").innerHTML = "";
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json'
+                },
+                type: 'POST',
+                data: JSON.stringify({items: items}),
+                url: `http://localhost:8080/api/checkout`,
+                success: function () {
+                    window.location.href = '/user/checkout';
+                    console.log('send data success')
+                },
+                error: function () {
+                    console.log('send data fail')
+                }
+            })
+        }
+
+    }
+
+    function isCartPayEmpty() {
+        return $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/checkout/checkCartPay'
+        })
+            .then(function (data) {
+                return data === true;
+            })
+            .catch(function () {
+                console.log("can not check cart pay");
+                return false;
+            });
     }
 </script>
 </body>

@@ -5,15 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
 
+        h1 {
+            color: #333;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 8px;
+            background-color: #fff;
+            gap: 10px;
+        }
+
+        .order-header > div {
+            flex: 1;
+            border-bottom: 2px solid transparent;
+        }
+
+        .order-header > div:hover {
+            border-bottom: 2px solid #ee4d2d;
+        }
+
+        .order-header a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .order-header span {
+            padding: 10px;
+            display: inline-block;
+        }
+
+        p {
+            color: #555;
+            font-size: 18px;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
 <h1>Order</h1>
+<div class="order-header">
 
 <div th:each="orderStatus : ${orderStatuses}">
     <a th:href="@{/user/orders(type=${orderStatus.id})}">
         <span th:text="${orderStatus.name}"></span>
     </a>
+</div>
 </div>
 <div th:if="${orders == null}">
     <p>Empty</p>
@@ -31,7 +90,6 @@
             <br>
             <a th:href="@{/user/orders/buyAgain/{id}(id=${order.id})}">Buy Again</a> ||
             <a th:href="@{/user/reviews/create/{id}(id=${orderDetail.product.id})}">Rate</a>
-
         </div>
     </div>
 </div>

@@ -26,15 +26,18 @@ public class CartController {
     private IProductService productService;
 
     @ModelAttribute("cart")
-    public Cart setupCart(@ModelAttribute("user") UserDto userDto) {
-        CartItem cartItem1 = new CartItem(productService.findById(1L), 3);
-        CartItem cartItem2 = new CartItem(productService.findById(2L), 2);
-        Cart cart = new Cart(userDto.getId());
-        cart.getCart().add(cartItem1);
-        cart.getCart().add(cartItem2);
-        return cart;
+    public Cart setupCart(@SessionAttribute("user") UserDto userDto) {
+        if (userDto != null) {
+            CartItem cartItem1 = new CartItem(productService.findById(1L), 3);
+            CartItem cartItem2 = new CartItem(productService.findById(2L), 2);
+            Cart cart = new Cart(userDto.getId());
+            cart.getCart().add(cartItem1);
+            cart.getCart().add(cartItem2);
+            return cart;
+        } else {
+            return new Cart();
+        }
     }
-
     @ModelAttribute("user")
     private UserDto currentUser(HttpServletRequest request) {
         HttpSession session = request.getSession();

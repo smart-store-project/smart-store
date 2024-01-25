@@ -4,15 +4,65 @@
     <meta charset="UTF-8">
     <title>Product Details</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" th:href="@{/resources/product-detail.css}">
+    <style>
+        body {
+            text-align: center;
+            padding: 40px 0;
+            background: #EBF0F5;
+        }
+
+        h1 {
+            color: #FFFFFF;
+            font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+            font-weight: 900;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #FFFFFF;
+            font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        i {
+            color: #9ABC66;
+            font-size: 50px;
+            line-height: 100px;
+            margin-left: -15px;
+        }
+
+        .customCard {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: 0 2px 3px #C8D0D8;
+            width: 300px;
+        }
+
+        .customCircle {
+            border-radius: 100px;
+            height: 100px;
+            width: 100px;
+            background: #F8FAF5;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
 <h1>Product Details</h1>
 
-<button onclick="topFunction()" id="myBtn-scroll" title="Go to top"><i class="fas fa-chevron-up"></i></button>
 <section class="product-detail">
 
 </section>
+<form id="addToCartForm">
+    <input type="hidden" name="productId" th:value="${product.id}" />
 
 <table border="1">
     <tr>
@@ -41,28 +91,48 @@
         <th>Category:</th>
         <td th:text="${product != null ? product.category.name : ''}"></td>
     </tr>
+
+    <!-- Thêm nút "Add to Cart" -->
+    <tr>
+        <th>Action:</th>
+        <td>
+            <button  id="openCustomPopupBtn" type="button" onclick="addToCart()">Add to Cart</button>
+        </td>
+    </tr>
+
+
 </table>
+</form>
 
+<div id="customPopup" class="customCard">
+    <div class="customCircle">
+        <i class="customCheckmark">✓</i>
+    </div>
+    <h1>Sản phẩm đã được thêm vào giỏ hàng</h1>
+</div>
 <script>
-    let myButton = document.getElementById("myBtn-scroll");
+    document.getElementById('openCustomPopupBtn').addEventListener('click', function (event) {
+        event.preventDefault();
+        document.getElementById('customPopup').style.display = 'block';
+        setTimeout(function () {
+            document.getElementById('customPopup').style.display = 'none';
+        }, 3000);
+    });
 
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function () {
-        scrollFunction()
-    };
 
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            myButton.style.display = "block";
-        } else {
-            myButton.style.display = "none";
-        }
-    }
+    function addToCart() {
+        let productId = document.getElementsByName("productId")[0].value;
 
-    // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+        $.ajax({
+            type: "POST",
+            url: "/api/cart/add/" + productId,
+            success: function (data) {
+                console.log("Product added to cart successfully");
+            },
+            error: function (error) {
+                console.error("Error adding product to cart: " + error);
+            }
+        });
     }
 </script>
 </body>

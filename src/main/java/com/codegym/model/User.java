@@ -39,6 +39,7 @@ public class User {
 
     @Pattern(regexp = "^(84|0[3|5|7|8|9])+([0-9]{8})$", message = "Invalid phone number")
     private String phoneNumber;
+
     private String address;
 
     @ManyToMany(fetch = FetchType.EAGER)

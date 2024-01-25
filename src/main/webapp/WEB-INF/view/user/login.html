@@ -44,7 +44,7 @@
         </div>
 
         <div class="login-content-item login-content-item-2">
-            <form action="hello-servlet" class="login-content-item-2-form" method="post">
+            <form th:action="@{/j_spring_security_check}" class="login-content-item-2-form" method="post">
                 <div class="login-content-item-2-form-header">
                     <div class="login-container-content-item-2-form-header-item1">
                         Đăng nhập
@@ -65,11 +65,12 @@
                         <input type="text" name="username" class="login-container-content-item-2-form-body-item-1-inputText" placeholder="Username" required />
 
                         <div class="login-container-content-item-2-form-body-item-1-passwordBox">
-                            <input type="password" class="login-container-content-item-2-form-body-item-1-inputPassword" placeholder="Mật khẩu" name="login-password" id="passwordInput" required  />
+                            <input type="password" class="login-container-content-item-2-form-body-item-1-inputPassword" placeholder="Mật khẩu" name="password" id="passwordInput" required  />
                             <div class="login-container-content-item-2-form-body-item-1-inputPassword-eyeIcon" onclick="togglePasswordVisibility()">
                                 <div class="login-container-content-item-2-form-body-item-1-inputPassword-openEyeIcon"></div>
                             </div>
                         </div>
+                        <input type="checkbox" style="margin-left:200px" name="remember-me" value="remember me"/>
                         <button type="submit" class="login-container-content-item-2-form-body-item-1-submitLogin">
                             ĐĂNG NHẬP
                         </button>

@@ -3,6 +3,7 @@ package com.codegym.controller;
 import com.codegym.model.Brand;
 import com.codegym.model.Category;
 import com.codegym.model.Product;
+import com.codegym.model.dto.UserDto;
 import com.codegym.service.IBrandService;
 import com.codegym.service.ICategoryService;
 import com.codegym.service.IProductService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
@@ -29,11 +31,16 @@ public class ProductController {
         this.categoryService = categoryService;
         this.productService = productService;
     }
-
+    @ModelAttribute("user")
+    private UserDto currentUser(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        return (UserDto) session.getAttribute("user");
+    }
 
     @GetMapping("")
-    public ModelAndView showAllProduct() {
+    public ModelAndView showAllProduct(@ModelAttribute("user") UserDto userDto) {
         ModelAndView view = new ModelAndView("product/content");
+        view.addObject("users",userDto);
         view.addObject("products", productService.findAll());
         return view;
     }

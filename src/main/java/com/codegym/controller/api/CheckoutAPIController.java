@@ -1,4 +1,4 @@
-package com.codegym.api;
+package com.codegym.controller.api;
 
 import com.codegym.model.Cart;
 import com.codegym.model.CartItem;

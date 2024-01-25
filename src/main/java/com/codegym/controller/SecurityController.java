@@ -22,8 +22,7 @@ public class SecurityController {
 
     @GetMapping(value = {"/", "/home", "/user",""})
     public ModelAndView homepage() {
-        ModelAndView modelAndView = new ModelAndView("/product/content");
-        modelAndView.addObject("user", getPrincipal());
+        ModelAndView modelAndView = new ModelAndView("redirect:/products");
         return modelAndView;
     }
 

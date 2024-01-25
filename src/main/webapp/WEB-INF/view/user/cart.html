@@ -1,15 +1,87 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
+<head th:replace="layout::head">
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Title</title>
 </head>
 <body>
+<div class="cart-header">
+    <div class="cart-header-container">
+        <div class="cart-header-container-row">
+            <div class="cart-header-container-row-left">
+                <div class="cart-header-container-row-left-title">
+                    <a href="#" style="text-decoration: none">Kênh người bán</a>
+                </div>
+                <div class="line"></div>
+                <div class="cart-header-container-row-left-title-rel inline-block">
+                    <a href="https://banhang.shopee.vn/"
+                       class="navbar__left--link   text-white hover:opacity-70 pr-4 pl-4">
+                        Tải ứng dụng
+                    </a>
+                    <div class="subnav__download navbar__subnav hidden absolute top-12 left-2 p-2 w-72 bg-white box-border animate-fadeIn z-20">
+                        <a href="https://shopee.vn/web" target="_blank">
+                            <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/d91264e165ed6facc6178994d5afae79.png"
+                                 alt="download_qr_code" class="subnav__download--qrcode">
+                            <div class="flex flex-wrap sm:flex-no-wrap justify-between items-center p-4">
+                                <img src="/resources/image/ios.png" class="w-28 w-full sm:w-1/2 mb-4 pr-3" alt="">
+                                <img src="/resources/image/android.png" class="w-28 w-full sm:w-1/2 mb-4" alt="">
+                                <div class="w-full mb-4">
+                                    <img src="/resources/image/appgallery.png" class="w-28" alt="">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="line"></div>
+                <div class="cart-header-container-row-left-title">
+                    <a href="#" style="text-decoration: none">Kết nối</a>
+                </div>
+                <div class="cart-header-container-row-left-icon">
+                    <div class="navbar__left--item">
+                        <a href="https://facebook.com/ShopeeVN" class="row__left--icon fab fa-facebook"
+                           title="Kết nối Facebook"></a>
+                        <a href="https://instagram.com/Shopee_VN" class="row__left--icon fab fab fa-instagram"
+                           title="Kết nối Instagram"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-header-container-row-right">
+                <div class="cart-header-container-row-right-title">
+                    <i class="fa-regular fa-bell" style="padding-left: 3px"></i> Thông báo
+                </div>
+                <div class="cart-header-container-row-right-title">
+                    <i class="fas fa-question-circle" style="padding-left: 3px"></i> Hỗ trợ
+                </div>
+                <div class="cart-header-container-row-right-title-rel">
+                    <a href="https://shopee.vn/user/purchase/" class="usermode__log">
+                        <img class="usermode--uicon" src="/resources/image/User-Avatar-PNG-Transparent-Image.png"
+                             alt="">
+                        <p class="navbar__right--link usermode--name " style="font-size: 1.4rem;">Đình Hiếu</p>
+                    </a>
+                    <ul class="usermode__menu navbar__subnav">
+                        <li class="usermode__menu--item">
+                            <a href="https://shopee.vn/user/account/">Tài khoản của tôi</a>
+                        </li>
+                        <li class="usermode__menu--item">
+                            <a href="https://shopee.vn/user/purchase/">Đơn mua</a>
+                        </li>
+                        <li class="usermode__menu--item">
+                            <a href="">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <h1>Cart</h1>
 <span id="cart-empty"></span>
-<table>
+<table class="table-cart">
     <tr>
         <th>Checkbox</th>
         <th>Id</th>
@@ -31,13 +103,12 @@
         <td th:text="${cartItem.product.name}"></td>
         <td th:text="${cartItem.product.price}"></td>
         <td>
-            <button onclick="desItem(event)"> -</button>
+            <button class="hover-effect" onclick="desItem(event)" type="button">-</button>
             <label>
-                <input type="number" th:value="${cartItem.quantity}" onchange="changeQuantity(event)"
-                       oninput="validateQuantity(event)">
+                    <input type="number" th:value="${cartItem.quantity}" onchange="changeQuantity(event)"
+                           oninput="validateQuantity(event)">
             </label>
-            <button onclick="incItem(event)"> +</button>
-        </td>
+            <button type="button" class="hover-effect"  onclick="incItem(event)">+</button>        </td>
         <td th:text="${cartItem.getTotalPrice()}"></td>
         <td>
             <button onclick="deleteItem(event)" class="btn btn-danger">Xóa</button>
@@ -45,11 +116,11 @@
     </tr>
     <tr>
         <td>Total price:</td>
-        <td th:text="${cart.getTotalPrice()}"></td>
+        <td id="cartTotalPrice" th:text="${cart.getTotalPrice()}"></td>
     </tr>
 </table>
 
-<button onclick="checkout()">Check out</button>
+<button onclick="checkout()" class="checkout-btn">Check out</button>
 
 <script
         src="https://code.jquery.com/jquery-3.7.1.js"
@@ -59,8 +130,8 @@
 <script>
     function desItem(event) {
         let button = event.target;
-        let currentNode = button.closest('tr');
-        let currentQuantity = parseInt(currentNode.querySelector('td:nth-child(6) label input').value, 10);
+        let currentNode = button.closest('.cart-body-container-page-content-row');
+        let currentQuantity = parseInt(currentNode.querySelector('.cart-body-container-page-header-quantity-container input').value, 10);
         updateQuantity(event, currentQuantity - 1);
     }
 
@@ -96,7 +167,6 @@
     function updateQuantity(event, quantity) {
         let button = event.target;
         let currentNode = button.closest('tr');
-
         let id = currentNode.querySelector('td:nth-child(2)').textContent.trim();
 
         if (quantity > 0) {
@@ -106,6 +176,11 @@
                 success: function (data) {
                     let row = currentNode.querySelector('td:nth-child(6) label input');
                     row.value = data;
+                    let unitPrice = parseFloat(currentNode.querySelector('td:nth-child(5)').textContent.trim());
+                    let totalPriceNode = currentNode.querySelector('td:nth-child(7)');
+                    let newTotalPrice = unitPrice * data;
+                    totalPriceNode.textContent = newTotalPrice;
+                    updateCartTotalPrice();
                 },
                 error: function (error) {
                     console.error("Error updating quantity: " + error);
@@ -191,8 +266,17 @@
                 return false;
             });
     }
-
-
+    function updateCartTotalPrice(){
+        let total= 0 ;
+        let totalPriceNode = document.querySelectorAll('td:nth-child(7)');
+        totalPriceNode.forEach(function (node) {
+            total += parseFloat(node.textContent.trim());
+        });
+        let cartTotalPriceNode = document.querySelector('#cartTotalPrice');
+        if (cartTotalPriceNode) {
+            cartTotalPriceNode.textContent = total;
+        }
+    }
 </script>
 </body>
 </html>

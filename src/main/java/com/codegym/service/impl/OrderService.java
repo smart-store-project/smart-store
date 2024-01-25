@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Optional;
@@ -48,15 +49,15 @@ public class OrderService implements IOrderService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            if (authentication.getPrincipal() instanceof UserDetails userDetails) {
-                return userService.findByUsername(userDetails.getUsername()).orElse(null);
+            Principal principal = (Principal) authentication.getPrincipal();
+            if (principal instanceof UserDetails ) {
+                return userService.findByUsername(((UserDetails)principal).getUsername()).orElse(null);
             } else {
                 return null;
             }
         }
         return null;
     }
-
     @Override
     public Iterable<Order> findAll() {
         return iOrderRepository.findAll();
