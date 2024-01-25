@@ -67,8 +67,8 @@ public class ReviewController {
         review.setUser(userService2.convertUserDtoToUser(userDto).get());
         review.setDate(Timestamp.from(Instant.now()));
         reviewService.save(review);
-        ModelAndView modelAndView = new ModelAndView("/product/comment");
-        modelAndView.addObject("message", "Add review successfully");
+        Product product = review.getProduct();
+        ModelAndView modelAndView = new ModelAndView("redirect:/products/" + product.getId() + "/view");
         return modelAndView;
     }
 

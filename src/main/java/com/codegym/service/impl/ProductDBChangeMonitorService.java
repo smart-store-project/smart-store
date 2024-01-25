@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -48,6 +50,7 @@ public class ProductDBChangeMonitorService implements IProductDBChangeMonitorSer
                 previousValues.put(entity.getId(), currentAttributeValue);
                 Notification notification = new Notification();
                 if (previousAttributeValue != null) {
+                    notification.setDate(Timestamp.from(Instant.now()));
                     notification.setTitle("Change status");
                     notification.setDescription("Order change status from " + previousAttributeValue + " to " + currentAttributeValue);
                 } else {

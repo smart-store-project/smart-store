@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
 
 @Entity
 public class Notification {
@@ -23,6 +24,8 @@ public class Notification {
     private String description;
 
     private String imgURL;
+
+    private Timestamp date;
 
     @ManyToOne
     @JsonBackReference
@@ -67,5 +70,13 @@ public class Notification {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
     }
 }

@@ -43,7 +43,7 @@ public class RegisterController {
             });
         }
         if (bindingResult.hasFieldErrors()) {
-            return new ModelAndView("/register");
+            return new ModelAndView("/user/register");
         }
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.findByName("ROLE_USER"));

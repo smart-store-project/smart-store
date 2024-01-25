@@ -3,9 +3,11 @@ package com.codegym.controller;
 import com.codegym.model.Brand;
 import com.codegym.model.Category;
 import com.codegym.model.Product;
+import com.codegym.model.Review;
 import com.codegym.service.IBrandService;
 import com.codegym.service.ICategoryService;
 import com.codegym.service.IProductService;
+import com.codegym.service.IReviewService;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +26,14 @@ public class ProductController {
 
     private final IProductService productService;
 
-    public ProductController(IBrandService brandService, ICategoryService categoryService, IProductService productService) {
+    private final IReviewService reviewService;
+
+    public ProductController(IBrandService brandService, ICategoryService categoryService,
+                             IProductService productService, IReviewService reviewService) {
         this.brandService = brandService;
         this.categoryService = categoryService;
         this.productService = productService;
+        this.reviewService = reviewService;
     }
 
 
@@ -75,8 +81,19 @@ public class ProductController {
 
     @GetMapping("/{id}/view")
     public ModelAndView viewProduct(@PathVariable Long id) {
-        ModelAndView view = new ModelAndView("product/view");
-        view.addObject("product", productService.findById(id));
+        ModelAndView view = new ModelAndView("product/detail");
+        Product product = productService.findById(id);
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Review> reviews = reviewService.findByProduct(product, pageable);
+        Brand brand =product.getCategory().getBrand();
+        Pageable pageable1 = PageRequest.of(0, 5);
+        Page<Product> brandProducts = productService.findProductByBrand(brand, pageable1);
+        Review review = new Review();
+        review.setProduct(product);
+        view.addObject("product", product);
+        view.addObject("reviews", reviews);
+        view.addObject("brandProducts", brandProducts);
+        view.addObject("review", review);
         return view;
     }
 

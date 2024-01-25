@@ -12,6 +12,7 @@ import com.codegym.model.dto.UserDto;
 import com.codegym.repository.IOrderRepository;
 import com.codegym.service.IOrderService;
 import com.codegym.service.IUserService;
+import com.codegym.service.IUserService2;
 import com.codegym.service.IWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Optional;
@@ -35,27 +37,9 @@ public class OrderService implements IOrderService {
     private IWalletService walletService;
 
     @Autowired
-    private IUserService userService;
+    private IUserService2 userService2;
 
 
-    @ModelAttribute("user")
-    private UserDto currentUser(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        return (UserDto) session.getAttribute("user");
-    }
-
-    private User getUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication != null && authentication.isAuthenticated()) {
-            if (authentication.getPrincipal() instanceof UserDetails userDetails) {
-                return userService.findByUsername(userDetails.getUsername()).orElse(null);
-            } else {
-                return null;
-            }
-        }
-        return null;
-    }
 
     @Override
     public Iterable<Order> findAll() {
@@ -78,25 +62,7 @@ public class OrderService implements IOrderService {
         iOrderRepository.deleteById(id);
     }
 
-    @Override
-    public void addOrder(Order order, Cart cart) throws UnavailableBalanceException {
-            User user = getUser();
-            order.setUser(user);
-            iOrderRepository.save(order);
-            for (CartItem cartItem : order.getCartPay().getCart()) {
-                cart.removeCartItem(cartItem.getProduct().getId());
-            }
-            if (order.getPaymentMethod().getName().equalsIgnoreCase("wallet")) {
-                Wallet wallet = walletService.findByUser(user);
-                double newBalance = walletService.findByUser(user).getBalance() - order.getCartPay().getTotalPrice();
-                if (newBalance >= 0) {
-                    wallet.setBalance(newBalance);
-                    walletService.save(wallet);
-                } else {
-                    throw new UnavailableBalanceException();
-                }
-            }
-    }
+
 
     @Override
     public Iterable<Order> findAllByUserAndOrderStatus(User user, OrderStatus orderStatus) {
@@ -112,9 +78,9 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void addOrder(Order order, @ModelAttribute("user") UserDto userDto) throws UnavailableBalanceException {
+    public void addOrder(Order order, UserDto userDto) throws UnavailableBalanceException {
         if (order.getPaymentMethod().getName().equalsIgnoreCase("wallet")) {
-            User user = getUser();
+            User user = userService2.convertUserDtoToUser(userDto).get();
             Wallet wallet = walletService.findByUser(user);
             double newBalance = walletService.findByUser(user).getBalance() - order.getCartPay().getTotalPrice();
             if (newBalance >= 0) {
