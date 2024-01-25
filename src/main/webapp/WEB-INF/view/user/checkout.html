@@ -106,7 +106,7 @@
             <th>Item Subtotal</th>
         </tr>
         <tr th:each="item : ${cartPay.getCart()}">
-            <td th:text="imageURL"></td>
+            <td th:text="${item.product.imgURL}"></td>
             <td th:text="${item.product.name}"></td>
             <td th:text="${item.product.price}"></td>
             <td th:text="${item.quantity}"></td>

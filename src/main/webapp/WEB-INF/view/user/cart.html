@@ -63,7 +63,12 @@
         button:hover {
             background-color: #218838;
         }
-
+        .right-align {
+            text-align: right;
+        }
+        button#checkout-btn {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -88,14 +93,24 @@
             </label>
         </td>
         <td th:text="${cartItem.product.id}"></td>
-        <td>Image</td>
+        <td >
+            <img th:src="${cartItem.product.imgURL}" alt="">
+        </td>
         <td th:text="${cartItem.product.name}"></td>
         <td th:text="${cartItem.product.price}"></td>
-        <td>
+        <td style="
+    display: flex;
+    justify-content: center;
+    align-items: center
+">
             <button onclick="desItem(event)"> -</button>
             <label>
                 <input type="number" th:value="${cartItem.quantity}" onchange="changeQuantity(event)"
-                       oninput="validateQuantity(event)">
+                       oninput="validateQuantity(event)" style="
+    width: 30px;
+    height: 27px;
+    margin: 10px;
+">
             </label>
             <button onclick="incItem(event)"> +</button>
         </td>
@@ -104,13 +119,15 @@
             <button onclick="deleteItem(event)" class="btn btn-danger">Xóa</button>
         </td>
     </tr>
-    <tr>
+    <tr class="right-align">
         <td>Total price:</td>
         <td th:text="${cart.getTotalPrice()}"></td>
     </tr>
 </table>
 
-<button onclick="checkout()">Check out</button>
+<div class="right-align">
+    <button id="checkout-btn" onclick="checkout()">Check out</button>
+</div>
 
 
 <script
@@ -158,7 +175,6 @@
     function updateQuantity(event, quantity) {
         let button = event.target;
         let currentNode = button.closest('tr');
-
         let id = currentNode.querySelector('td:nth-child(2)').textContent.trim();
 
         if (quantity > 0) {
@@ -168,6 +184,11 @@
                 success: function (data) {
                     let row = currentNode.querySelector('td:nth-child(6) label input');
                     row.value = data;
+                    let unitPrice = parseFloat(currentNode.querySelector('td:nth-child(5)').textContent.trim());
+                    let totalPriceNode = currentNode.querySelector('td:nth-child(7)');
+                    let newTotalPrice = unitPrice * data;
+                    totalPriceNode.textContent = newTotalPrice;
+                    updateCartTotalPrice();
                 },
                 error: function (error) {
                     console.error("Error updating quantity: " + error);
@@ -252,6 +273,17 @@
                 console.log("can not check cart pay");
                 return false;
             });
+    }
+    function updateCartTotalPrice(){
+        let total= 0 ;
+        let totalPriceNode = document.querySelectorAll('td:nth-child(7)');
+        totalPriceNode.forEach(function (node) {
+            total += parseFloat(node.textContent.trim());
+        });
+        let cartTotalPriceNode = document.querySelector('#cartTotalPrice');
+        if (cartTotalPriceNode) {
+            cartTotalPriceNode.textContent = total;
+        }
     }
 
 

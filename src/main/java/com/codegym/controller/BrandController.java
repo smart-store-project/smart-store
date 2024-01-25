@@ -65,7 +65,7 @@ public class BrandController {
     }
 
     @GetMapping("/view/sort")
-    public ModelAndView getSortedProductForBrand(@RequestParam String sortType, @RequestParam Long brandId) {
+    public ModelAndView getSortedProductForBrand(@RequestParam String sortType, @RequestParam Long brandId, Pageable pageable) {
         Brand brand = brandService.findById(brandId);
         List<Product> sortedProducts;
         switch (sortType) {
@@ -82,9 +82,17 @@ public class BrandController {
                 sortedProducts = productService.findAllByBrand(brand);
         }
         ModelAndView view = new ModelAndView("brand/brand-view");
-        view.addObject("products", sortedProducts);
+        Iterable<Category> categories = categoryService.findAllByBrand(brand);
+        int page = Math.max(pageable.getPageNumber(), 0);
+        pageable = PageRequest.of(page, 1);
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), sortedProducts.size());
+        Page<Product> productsPage = new PageImpl<>(sortedProducts.subList(start, end), pageable, sortedProducts.size());
+        view.addObject("categories", categories);
+        view.addObject("products", productsPage);
         view.addObject("sortType", sortType);
         view.addObject("brand", brand);
+        view.addObject("brandId", brandId);
         return view;
     }
     @GetMapping("/{brandId}/view/category/{categoryId}")

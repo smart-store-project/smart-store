@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeHttpRequests()
                 .requestMatchers("/", "/home", "","/products/**", "/brands/**", "/categories/**").permitAll()
                 .requestMatchers("/register/**").anonymous()
-                .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN", "SELLER")
+                .requestMatchers("/user/**", "/api/**").hasAnyRole("USER", "ADMIN", "SELLER")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/seller/**").hasRole("SELLER")
                 .and()

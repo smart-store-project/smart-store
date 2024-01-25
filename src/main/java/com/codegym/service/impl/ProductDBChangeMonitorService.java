@@ -49,8 +49,8 @@ public class ProductDBChangeMonitorService implements IProductDBChangeMonitorSer
                 System.out.println("Attribute value changed: " + currentAttributeValue);
                 previousValues.put(entity.getId(), currentAttributeValue);
                 Notification notification = new Notification();
+                notification.setDate(Timestamp.from(Instant.now()));
                 if (previousAttributeValue != null) {
-                    notification.setDate(Timestamp.from(Instant.now()));
                     notification.setTitle("Change status");
                     notification.setDescription("Order change status from " + previousAttributeValue + " to " + currentAttributeValue);
                 } else {
